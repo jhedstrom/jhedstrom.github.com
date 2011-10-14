@@ -1,0 +1,11 @@
+
+.subsection h1 {
+  color: #999;
+  background: #fff;
+  font-size: 4em;
+}
+
+/* Small code */
+.small .sh_conf {
+  font-size: 200%;
+}

@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>Drush Make - PNWDS 2011</title>
+
+  <meta name="viewport" content="width=device-width"/>
+
+  <link rel="stylesheet" href="./css/reset.css" type="text/css"/>
+  <link rel="stylesheet" href="./css/showoff.css" type="text/css"/>
+
+  <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
+  <script type="text/javascript" src="./js/jquery.cycle.all.js"></script>
+	<script type="text/javascript" src="./js/jquery-print.js"></script>
+  <script type="text/javascript" src="./js/jquery.batchImageLoad.js"></script>
+
+  <script type="text/javascript" src="./js/jquery.doubletap-0.1.js"></script>
+
+  <script type="text/javascript" src="./js/fg.menu.js"></script>
+  <script type="text/javascript" src="./js/showoff.js"></script>
+  <script type="text/javascript" src="./js/jTypeWriter.js"> </script>
+  <script type="text/javascript" src="./js/sh_main.min.js"></script>
+  <script type="text/javascript" src="./js/core.js"></script>
+  <script type="text/javascript" src="./js/showoffcore.js"></script>
+  <script type="text/javascript" src="./js/coffee-script.js"></script>
+
+  <link type="text/css" href="./css/fg.menu.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href="./css/theme/ui.all.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href="./css/sh_style.css" rel="stylesheet" >
+
+  
+    <link rel="stylesheet" href="file/presentation.css" type="text/css"/>
+  
+
+  
+
+  <script type="text/javascript">
+  $(function(){
+      setupPreso(false, './');
+  });
+  </script>
+
+</head>
+
+<body>
+
+<a tabindex="0" href="#search-engines" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="navmenu"><span class="ui-icon ui-icon-triangle-1-s"></span>slides</a>
+<div id="navigation" class="hidden"></div>
+
+<div id="help">
+  <table>
+    <tr><td class="key">z, ?</td><td>toggle help (this)</td></tr>
+    <tr><td class="key">space, &rarr;</td><td>next slide</td></tr>
+    <tr><td class="key">shift-space, &larr;</td><td>previous slide</td></tr>
+    <tr><td class="key">d</td><td>toggle debug mode</td></tr>
+    <tr><td class="key">## &lt;ret&gt;</td><td>go to slide #</td></tr>
+    <tr><td class="key">c, t</td><td>table of contents (vi)</td></tr>
+    <tr><td class="key">f</td><td>toggle footer</td></tr>
+    <tr><td class="key">r</td><td>reload slides</td></tr>
+    <tr><td class="key">n</td><td>toggle notes</td></tr>
+    <tr><td class="key">p</td><td>run preshow</td></tr>
+  </table>
+</div>
+
+<div class="buttonNav">
+  <input type="submit" onClick="prevStep();" value="prev"/>
+  <input type="submit" onClick="nextStep();" value="next"/>
+</div>
+
+<div id="preso">loading presentation...</div>
+<div id="footer">
+  <span id="slideInfo"></span>
+  <span id="debugInfo"></span>
+  <span id="notesInfo"></span>
+</div>
+
+<div id="slides" class="offscreen" style="display:none;">
+<div class="slide" data-transition="none"><div class="content" ref="one/one/1">
+<h1>Drush Make</h1>
+
+<p>The theory, the practice, the future</p></div>
+</div><div class="slide" data-transition="none"><div class="content center bullets" ref="one/one/2">
+<h1>About me</h1>
+
+<ul>
+<li>Jonathan Hedstrom</li>
+<li><a href="http://twitter.com/jhedstro">@jhedstro</a></li>
+<li><a href="http://drupal.org/user/208732">jhedstrom</a></li>
+<li><img src="./file/one/opensourcery.png" alt="opensourcery"/>
+<img src="./file/one/cc.png" alt="cc"/></li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/one/3">
+<h1>Drush Make</h1>
+
+<p>Some quick examples</p></div>
+</div><div class="slide" data-transition="none"><div class="content subsection" ref="one/one/4">
+<p>Core + Views</p>
+
+<pre class="sh_conf"><code>; Core, latest version
+projects[] = drupal
+
+; Views, latest version
+projects[] = views</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content subsection" ref="one/one/5">
+<p>Specific versions</p>
+
+<pre class="sh_conf"><code>projects[views][version] = 3.0</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/one/6">
+<h1>Why</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/one/7">
+<p>Site manifest</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/one/8">
+<p>Easy for developers to quickly get up to speed on a project</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/one/9">
+<p>Can eliminate duplicative repositories</p>
+
+<p>(Doesn't have to)</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/one/10">
+<p>Encourages contributing back to the community</p>
+
+<p>(Which encourages well thought out patches instead of hacks)</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/one/11">
+<h1>Advanced usage</h1></div>
+</div><div class="slide" data-transition="none"><div class="content subsection small" ref="one/one/12">
+<p>Patches</p>
+
+<pre class="sh_conf"><code>projects[spaces][subdir] = "contrib"
+projects[spaces][version] = "3.1"
+; Patch spaces: http://drupal.org/node/976324#comment-4354134
+projects[spaces][patch][] = "http://drupal.org/files/issues/spaces.976324-08.patch"
+; Patch spaces: http://drupal.org/node/1232804#comment-4794526
+projects[spaces][patch][] = "http://drupal.org/files/issues/1232804-spaces_og_group_node_403.patch"</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content subsection small" ref="one/one/13">
+<p>Customizing Distributions</p>
+
+<pre class="sh_conf"><code>; OpenAtrium
+projects[openatrium][type] = "profile"
+projects[openatrium][download][type] = "git"
+projects[openatrium][download][tag] = "6.x-1.0"
+
+; Additional modules
+projects[editablefields][subdir] = "contrib"
+projects[editablefields][version] = "2.0"</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content subsection small" ref="one/one/14">
+<p>Atrium with Pressflow</p>
+
+<pre class="sh_conf"><code>; Pressflow
+projects[pressflow][type] = "core"
+projects[pressflow][download][type] = "file"
+projects[pressflow][download][url] = "http://launchpad.net/pressflow/6.x/6.22.104/+download/pressflow-6.22.104.tar.gz"
+
+; OpenAtrium
+projects[openatrium][type] = "profile"
+projects[openatrium][download][type] = "git"
+projects[openatrium][download][tag] = "6.x-1.0"</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content subsection" ref="one/one/15">
+<p>Working copy</p>
+
+<pre class="sh_sh"><code>drush make --working-copy foo.make</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content subsection small" ref="one/one/16">
+<p>External libraries</p>
+
+<pre class="sh_conf"><code>; Solr library
+libraries[SolrPHPClient][download][type] = "svn"
+libraries[SolrPHPClient][download][url] = "http://solr-php-client.googlecode.com/svn/trunk/"
+libraries[SolrPHPClient][download][revision] = "22"
+libraries[SolrPHPClient][destination] = "modules/contrib/apachesolr/"
+libraries[SolrPHPClient][directory_name] = "SolrPhpClient"
+
+; jQuery UI
+projects[jquery_ui][version] = "1.4"
+libraries[jquery_ui][download][type] = "get"
+libraries[jquery_ui][download][url] = "http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip"
+libraries[jquery_ui][directory_name] = "jquery.ui"
+libraries[jquery_ui][destination] = "modules/jquery_ui"</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="one/one/17">
+<p>Sample development setup</p>
+
+<pre class="sh_sh"><code>project/
+|- app/
+   |- my_project/
+   |  |  my_project.make
+   |  |  my_project.info
+   |  |  my_project.install
+   |  |- modules/
+   |     |- custom/
+   |     |- features/
+   |- docroot/
+      |- profiles/
+         |- standard/
+         |- my_project (sym link)</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content subsection small bullets incremental" ref="one/one/18">
+<h1>Things that could be better</h1>
+
+<ul>
+<li>Deployment support</li>
+<li><s>Acquia</s> (no)</li>
+<li><s>Pantheon</s> (no)</li>
+<li>Aegir (yes)</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content subsection bullets incremental" ref="one/one/19">
+<h1>Things that could be better</h1>
+
+<ul>
+<li><code>drush pm-update</code></li>
+<li>External dependencies</li>
+<li>Drupal.org distribution packaging</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content bullets incremental small" ref="one/one/20">
+<h1>The future of make</h1>
+
+<ul>
+<li><code>drush pm-update</code> needs an option to update the .make file</li>
+<li>Caching of downloads (currently, use squid)</li>
+<li>Drush 5 does this</li>
+<li>create a Drush Deploy strategy</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content bullets incremental" ref="one/one/21">
+<h1>The future of make</h1>
+
+<ul>
+<li>Patch manifest</li>
+<li>Better support</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content bullets incremental" ref="one/one/22">
+<h1>The future of make</h1>
+
+<ul>
+<li>and finally ...</li>
+<li><h3>Put make in drush core</h3></li>
+<li>http://drupal.org/node/1310130</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content bullets" ref="one/one/23">
+<h1>Thank you</h1>
+
+<ul>
+<li>node #1310130</li>
+<li>Presentation made with Showoff</li>
+<li><h3>Questions?</h3>
+
+<p><img src="./file/one/cc.png" alt="cc"/></p></li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content image title" ref="one/one~/1">
+<h1>Drush Make</h1>
+
+<h2>The theory, the practice, the future</h2></div>
+</div><div class="slide" data-transition="none"><div class="content subsection bullets incremental" ref="one/one~/2">
+<h1>Examples</h1>
+
+<ul>
+<li>Simple install
+  projects[] = views</li>
+<li>Specific versions
+  projects[views][version] = 3.0</li>
+<li>Distribution
+  TODO</li>
+<li>Patches
+  TODO</li>
+<li>External libraries
+  TODO</li>
+</ul>
+</div>
+</div></div>
+
+</body>
+</html>
