@@ -123,8 +123,10 @@ projects[] = views</code></pre></div>
 
 <p>(Which encourages well thought out patches instead of hacks)</p></div>
 </div><div class="slide" data-transition="none"><div class="content" ref="one/one/11">
+<p>Simplicity</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/one/12">
 <h1>Advanced usage</h1></div>
-</div><div class="slide" data-transition="none"><div class="content subsection small" ref="one/one/12">
+</div><div class="slide" data-transition="none"><div class="content subsection small" ref="one/one/13">
 <p>Patches</p>
 
 <pre class="sh_conf"><code>projects[spaces][subdir] = "contrib"
@@ -133,7 +135,7 @@ projects[spaces][version] = "3.1"
 projects[spaces][patch][] = "http://drupal.org/files/issues/spaces.976324-08.patch"
 ; Patch spaces: http://drupal.org/node/1232804#comment-4794526
 projects[spaces][patch][] = "http://drupal.org/files/issues/1232804-spaces_og_group_node_403.patch"</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content subsection small" ref="one/one/13">
+</div><div class="slide" data-transition="none"><div class="content subsection small" ref="one/one/14">
 <p>Customizing Distributions</p>
 
 <pre class="sh_conf"><code>; OpenAtrium
@@ -144,7 +146,7 @@ projects[openatrium][download][tag] = "6.x-1.0"
 ; Additional modules
 projects[editablefields][subdir] = "contrib"
 projects[editablefields][version] = "2.0"</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content subsection small" ref="one/one/14">
+</div><div class="slide" data-transition="none"><div class="content subsection small" ref="one/one/15">
 <p>Atrium with Pressflow</p>
 
 <pre class="sh_conf"><code>; Pressflow
@@ -156,11 +158,11 @@ projects[pressflow][download][url] = "http://launchpad.net/pressflow/6.x/6.22.10
 projects[openatrium][type] = "profile"
 projects[openatrium][download][type] = "git"
 projects[openatrium][download][tag] = "6.x-1.0"</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content subsection" ref="one/one/15">
+</div><div class="slide" data-transition="none"><div class="content subsection" ref="one/one/16">
 <p>Working copy</p>
 
 <pre class="sh_sh"><code>drush make --working-copy foo.make</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content subsection small" ref="one/one/16">
+</div><div class="slide" data-transition="none"><div class="content subsection small" ref="one/one/17">
 <p>External libraries</p>
 
 <pre class="sh_conf"><code>; Solr library
@@ -176,7 +178,7 @@ libraries[jquery_ui][download][type] = "get"
 libraries[jquery_ui][download][url] = "http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip"
 libraries[jquery_ui][directory_name] = "jquery.ui"
 libraries[jquery_ui][destination] = "modules/contrib/jquery_ui"</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="one/one/17">
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="one/one/18">
 <p>Sample development setup</p>
 
 <pre class="sh_sh"><code>project/
@@ -194,7 +196,7 @@ libraries[jquery_ui][destination] = "modules/contrib/jquery_ui"</code></pre></di
       |- profiles/
          |- standard/
          |- my_project (sym link)</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content subsection small bullets incremental" ref="one/one/18">
+</div><div class="slide" data-transition="none"><div class="content subsection small bullets incremental" ref="one/one/19">
 <h1>Things that could be better</h1>
 
 <ul>
@@ -204,7 +206,7 @@ libraries[jquery_ui][destination] = "modules/contrib/jquery_ui"</code></pre></di
 <li>Aegir (yes)</li>
 </ul>
 </div>
-</div><div class="slide" data-transition="none"><div class="content subsection bullets incremental" ref="one/one/19">
+</div><div class="slide" data-transition="none"><div class="content subsection bullets incremental" ref="one/one/20">
 <h1>Things that could be better</h1>
 
 <ul>
@@ -213,7 +215,7 @@ libraries[jquery_ui][destination] = "modules/contrib/jquery_ui"</code></pre></di
 <li>Drupal.org distribution packaging</li>
 </ul>
 </div>
-</div><div class="slide" data-transition="none"><div class="content bullets incremental small" ref="one/one/20">
+</div><div class="slide" data-transition="none"><div class="content bullets incremental small" ref="one/one/21">
 <h1>The future of make</h1>
 
 <ul>
@@ -223,24 +225,20 @@ libraries[jquery_ui][destination] = "modules/contrib/jquery_ui"</code></pre></di
 <li>create a Drush Deploy strategy</li>
 </ul>
 </div>
-</div><div class="slide" data-transition="none"><div class="content bullets incremental" ref="one/one/21">
-<h1>The future of make</h1>
-
+</div><div class="slide" data-transition="none"><div class="content bullets incremental" ref="one/one/22">
 <ul>
 <li>Patch manifest</li>
 <li>Better support</li>
 </ul>
 </div>
-</div><div class="slide" data-transition="none"><div class="content bullets incremental" ref="one/one/22">
-<h1>The future of make</h1>
-
+</div><div class="slide" data-transition="none"><div class="content bullets incremental" ref="one/one/23">
 <ul>
 <li>and finally ...</li>
 <li><h3>Put make in drush core</h3></li>
 <li>http://drupal.org/node/1310130</li>
 </ul>
 </div>
-</div><div class="slide" data-transition="none"><div class="content bullets small" ref="one/one/23">
+</div><div class="slide" data-transition="none"><div class="content bullets small" ref="one/one/24">
 <h1>Thank you</h1>
 
 <ul>
