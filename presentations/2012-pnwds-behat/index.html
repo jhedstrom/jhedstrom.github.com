@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>Quality Assurance for Drupal Sites with Behat and Mink</title>
+
+  <meta name="viewport" content="width=device-width"/>
+
+  <link rel="stylesheet" href="./css/reset.css" type="text/css"/>
+  <link rel="stylesheet" href="./css/showoff.css" type="text/css"/>
+
+  <link type="text/css" href="./css/fg.menu.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href="./css/theme/ui.all.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href="./css/sh_style.css" rel="stylesheet" />
+
+  <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
+  <script type="text/javascript" src="./js/jquery.cycle.all.js"></script>
+	<script type="text/javascript" src="./js/jquery-print.js"></script>
+  <script type="text/javascript" src="./js/jquery.batchImageLoad.js"></script>
+
+  <script type="text/javascript" src="./js/jquery.doubletap-0.1.js"></script>
+
+  <script type="text/javascript" src="./js/fg.menu.js"></script>
+  <script type="text/javascript" src="./js/showoff.js"></script>
+  <script type="text/javascript" src="./js/jTypeWriter.js"> </script>
+  <script type="text/javascript" src="./js/sh_main.min.js"></script>
+  <script type="text/javascript" src="./js/core.js"></script>
+  <script type="text/javascript" src="./js/showoffcore.js"></script>
+  <script type="text/javascript" src="./js/coffee-script.js"></script>
+
+  
+    
+      <script type="text/javascript" src="./js/sh_lang/sh_java.min.js"></script>
+    
+      <script type="text/javascript" src="./js/sh_lang/sh_gherkin.min.js"></script>
+    
+      <script type="text/javascript" src="./js/sh_lang/sh_javascript.min.js"></script>
+    
+      <script type="text/javascript" src="./js/sh_lang/sh_bash.min.js"></script>
+    
+      <script type="text/javascript" src="./js/sh_lang/sh_yml.min.js"></script>
+    
+  
+
+  
+    <link rel="stylesheet" href="./file/styles.css" type="text/css"/>
+  
+    <link rel="stylesheet" href="./file/sh_style.css" type="text/css"/>
+  
+
+  
+
+  <script type="text/javascript">
+  $(function(){
+      setupPreso(false, './');
+  });
+  </script>
+
+</head>
+
+<body>
+
+<a tabindex="0" href="#search-engines" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="navmenu"><span class="ui-icon ui-icon-triangle-1-s"></span>slides</a>
+<div id="navigation" class="hidden"></div>
+
+<div id="help">
+  <table>
+    <tr><td class="key">z, ?</td><td>toggle help (this)</td></tr>
+    <tr><td class="key">space, &rarr;</td><td>next slide</td></tr>
+    <tr><td class="key">shift-space, &larr;</td><td>previous slide</td></tr>
+    <tr><td class="key">d</td><td>toggle debug mode</td></tr>
+    <tr><td class="key">## &lt;ret&gt;</td><td>go to slide #</td></tr>
+    <tr><td class="key">c, t</td><td>table of contents (vi)</td></tr>
+    <tr><td class="key">f</td><td>toggle footer</td></tr>
+    <tr><td class="key">r</td><td>reload slides</td></tr>
+    <tr><td class="key">n</td><td>toggle notes</td></tr>
+    <tr><td class="key">p</td><td>run preshow</td></tr>
+    <tr><td class="key">P</td><td>toggle pause</td></tr>
+  </table>
+</div>
+
+<div class="buttonNav">
+  <input type="submit" onClick="prevStep();" value="prev"/>
+  <input type="submit" onClick="nextStep();" value="next"/>
+</div>
+
+<div id="preso">loading presentation...</div>
+<div id="footer">
+  <span id="slideInfo"></span>
+  <span id="debugInfo"></span>
+  <span id="notesInfo"></span>
+</div>
+
+<div id="slides" class="offscreen" style="display:none;">
+<div class="slide" data-transition="none"><div class="content" ref="one/01_slide/1">
+<h2>Quality Assurance</h2>
+
+<h2>for Drupal Sites</h2>
+
+<h2>with Behat and Mink</h2>
+
+<p><img src="./file/one/behat.png" alt="behat"/>
+<img src="./file/one/beehat-druplicon.png" alt="drupal"/></p>
+
+<p><img src="./file/one/cc.png" alt="cc"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content small bullets" ref="one/01_slide/2">
+<h1>Melissa Anderson</h1>
+
+<ul>
+<li><a href="http://twitter.com/lz411">@lz411</a></li>
+<li><a href="http://drupal.org/user/33570">eliza411</a></li>
+</ul>
+
+
+<p><img src="./file/one/opensourcery.png" alt="opensourcery"/>
+<img src="./file/one/melissa.jpg" alt="Melissa Anderson"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content small center bullets" ref="one/01_slide/3">
+<h1>Jonathan Hedstrom</h1>
+
+<ul>
+<li><a href="http://twitter.com/jhedstro">@jhedstro</a></li>
+<li><a href="http://drupal.org/user/208732">jhedstrom</a></li>
+</ul>
+
+
+<p><img src="./file/one/opensourcery.png" alt="opensourcery"/>
+<img src="./file/one/jhedstrom.jpg" alt="Jonathan Hedstrom"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/01_slide/4">
+<h1>QA is the voice of the user</h1></div>
+</div><div class="slide" data-transition="none"><div class="content small" ref="one/01_slide/5">
+<h1>QA touches every part of the development cycle</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/01_slide/6">
+<h1>Waterfall</h1>
+
+<p><img src="./file/one/waterfall.png" alt="Waterfall"/>
+Paul Hoadley / CC-BY-SA-2.5</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/01_slide/7">
+<p><img src="./file/one/agile.png" alt="Agile"/>
+Devon Fyson / CC-BY-SA-3.0</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/01_slide/8">
+<p><img src="./file/one/angryclient.jpg" alt="Angry client"/>
+http://www.untoldentertainment.com</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/01_slide/9">
+<h1>Behat is a tool for the entire cycle</h1>
+
+<p>It's a PHP implementation of Ruby's Cucumber and Python's Lettuce, all of which support Behavior-Driven Development and its three core values ...</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/01_slide/10">
+<p>One: Everyone on the team should refer to website features in the same way</p>
+
+<p><img src="./file/one/team.jpg" alt="Team"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/01_slide/11">
+<p>Two: Any feature on the site should have an identified verifiable value to the business or organization <object type="application/x-shockwave-flash" data="http://www.twpics.com/BUTTON5/twitbutton.swf" width="100" height="100"><param name="movie" value="http://www.twpics.com/BUTTON5/twitbutton.swf"/><param name="allowscriptaccess" value="always"/><param name="menu" value="false"/><param name="wmode" value="transparent"/><param name="flashvars" value="username=bobby_bluesqare"/><a href="http://www.bluesqaretips.com" title="www.bluesqaretips.com">www.bluesqaretips.com</a><embed src="http://www.twpics.com/BUTTON5/twitbutton.swf" type="application/x-shockwave-flash" allowscriptaccess="always" width="100" height="100" menu="false" wmode="transparent" flashvars="username=bobby_bluesqare"/></object></p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/01_slide/12">
+<p>Three: Ignorance is the biggest constraint of software development.</p>
+
+<p><img src="./file/one/dragons.jpg" alt="Hic sunt dracones"/></p>
+
+<p>Hic sunt dracones</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/01_slide/13">
+<h1>Behat provides the common language</h1>
+
+<div class="column column-2">
+  <pre class="sh_java sh_sourceCode">
+    <code>
+    package org.openqa.selenium.example;
+
+    import org.openqa.selenium.By;
+    import org.openqa.selenium.WebDriver;
+    import org.openqa.selenium.WebElement;
+    import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+    public class Example  {
+      public static void main(String[] args) {
+        // Create a new instance of the html unit driver
+        // Notice that the remainder of the code relies on the interface, 
+        // not the implementation.
+        WebDriver driver = new HtmlUnitDriver();
+
+        // And now use this to visit Google
+        driver.get("http://www.google.com");
+
+        // Find the text input element by its name
+        WebElement element = driver.findElement(By.name("q"));
+
+        // Enter something to search for
+        element.sendKeys("Cheese!");
+
+        // Now submit the form. WebDriver will find the form for us from the element
+        element.submit();
+
+        // Check the title of the page
+        System.out.println("Page title is: " + driver.getTitle());
+      }
+    }
+    </code>
+  </pre>
+</div>
+
+
+<div class="column column-2">
+  Second column
+</div>
+
+
+</div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/01_slide/14">
+<h1>Behat incorporates the business value</h1></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="one/01_slide/15">
+<h1>Tell a story</h1>
+
+<pre class="sh_gherkin"><code>Feature: Do not let anonymous people use the PHP filter
+  In order to prevent site hacking
+  As a site owner
+  I need to know that my site is properly configured</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="one/01_slide/16">
+<h1>Elaborate with scenarios</h1>
+
+<pre class="sh_gherkin"><code>Scenario: No php filter for comments
+  Given I am on the homepage
+   When I follow "Articles"
+    And I follow "Read more"
+   Then I should not see "You may post PHP code.
+        You should include &lt;?php ?&gt; tag"
+
+Given: Put the system in a known state
+ When: Act on the system
+ Then: Describe the result of the action</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="one/01_slide/17">
+<h1>Save to a file and execute</h1>
+
+<pre class="sh_gherkin"><code>Feature: Do not let anonymous people use the PHP filter
+  In order to prevent site hacking
+  As a site owner
+  I need to know that my site is properly configured
+
+  Scenario: No php filter for comments
+    Given I am on the homepage
+     When I follow "Articles"
+      And I follow "Read more"
+     Then I should not see "You may post PHP code.
+          You should include &lt;?php ?&gt; tag"
+
+1 scenario (1 passed)
+4 steps (4 passed)
+0m0.545s</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="one/01_slide/18">
+<h1>Behat can help us discover what we don't know</h1>
+
+<pre class="sh_gherkin"><code>Feature: Do not let anonymous people use the PHP filter
+  In order to prevent site hacking
+  As a site owner
+  I need to know that my site is properly configured
+
+Scenario: No php filter for comments
+  Given I am on the homepage
+   When I follow "Articles"
+    And I follow "Read more"
+   Then I should not see "You may post PHP code.
+        You should include &lt;?php ?&gt; tag"
+
+        The text "You may post PHP code. You should include &lt;?php ?&gt;
+        tag" appears in the text of this page, but it should not.
+
+1 scenario (1 failed)
+4 steps (3 passed, 1 failed)
+0m0.545s</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/01_slide/19">
+<h1>Mink</h1>
+
+<h2>Web acceptance testing</h2>
+
+<p>Separates the concept of testing web applications from the actual browser used.</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/01_slide/20">
+<h1>Mink Extension</h1>
+
+<p>Provides language and corresponding step-definitions for testing web applications.</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/01_slide/21">
+<h1>The Drupal Extension</h1>
+
+<p>http://drupal.org/project/drupalextension</p></div>
+</div><div class="slide" data-transition="none"><div class="content small" ref="one/01_slide/22">
+<h1>Getting started with the Drupal Extension</h1>
+
+<p>Sample <code>composer.json</code> file</p>
+
+<pre class="sh_javascript"><code>{
+  "require": {
+    "drupal/drupal-extension": "*"
+  },
+  "minimum-stability": "dev",
+  "config": {
+    "bin-dir": "bin/"
+  }
+}</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content small" ref="one/01_slide/23">
+<h1>Getting started with the Drupal Extension</h1>
+
+<pre class="sh_bash"><code>$ composer install</code></pre>
+
+<p><img src="./file/one/composer-install.png" alt="composer-install"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content small" ref="one/01_slide/24">
+<h1>Getting started with the Drupal Extension</h1>
+
+<p>Sample <code>behat.yml</code> file</p>
+
+<pre class="sh_yml"><code>default:
+  paths:
+    features: 'features'
+  extensions:
+    Behat\MinkExtension\Extension:
+      goutte: ~
+      selenium2: ~
+        base_url: http://git6site.devdrupal.org/
+    Drupal\DrupalExtension\Extension:
+      blackbox: ~</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="one/01_slide/25">
+<h1>Roadmap</h1></div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="one/01_slide/26">
+<h1>Roadmap</h1>
+
+<ul>
+<li>Provide reusable language and supporting step definitions common to most Drupal sites.</li>
+</ul>
+
+
+<p>(Will be ongoing)</p></div>
+</div><div class="slide" data-transition="none"><div class="content center small bullets incremental" ref="one/01_slide/27">
+<h1>Roadmap</h1>
+
+<p>Provide multiple ways of manipulating the backend (Drivers).</p>
+
+<ul>
+<li>Blackbox
+(no direct access to backend)</li>
+<li>Drush
+(uses Drush aliases to access local or remote sites)</li>
+<li>Drupal
+(uses direct Drupal API calls to access local sites)</li>
+<li>Services</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="one/01_slide/28">
+<h1>Roadmap</h1>
+
+<p>Support multiple major versions of Drupal</p></div>
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="one/01_slide/29">
+<h1>Roadmap</h1>
+
+<ul>
+<li>Ability to find and load sub-contexts that can be bundled with contrib modules</li>
+<li>Complex features can have common step-definitions (think Media, or Views)</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content" ref="one/01_slide/30">
+<h1>Thank you!</h1>
+
+<h2>Questions?</h2>
+
+<p>Druplicon <em>beehat</em> by jessehs</p>
+
+<p><img src="./file/one/beehat-druplicon.png" alt="drupal"/></p></div>
+</div></div>
+<div id="pauseScreen">
+  
+</div>
+
+</body>
+</html>
