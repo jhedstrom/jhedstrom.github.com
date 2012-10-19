@@ -42,6 +42,8 @@
     
       <script type="text/javascript" src="./js/sh_lang/sh_yml.min.js"></script>
     
+      <script type="text/javascript" src="./js/sh_lang/sh_sh.min.js"></script>
+    
   
 
   
@@ -276,10 +278,15 @@ Scenario: No php filter for comments
 <h1>Mink Extension</h1>
 
 <p>Provides language and corresponding step-definitions for testing web applications.</p></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="one/01_slide/21">
+</div><div class="slide" data-transition="none"><div class="content bullets incremental" ref="one/01_slide/21">
 <h1>The Drupal Extension</h1>
 
-<p>http://drupal.org/project/drupalextension</p></div>
+<ul>
+<li>Provides language and step-definitions specific to testing Drupal web applications.</li>
+<li>Builds on top of the Mink Extension</li>
+<li>http://drupal.org/project/drupalextension</li>
+</ul>
+</div>
 </div><div class="slide" data-transition="none"><div class="content small" ref="one/01_slide/22">
 <h1>Getting started with the Drupal Extension</h1>
 
@@ -315,9 +322,17 @@ Scenario: No php filter for comments
         base_url: http://git6site.devdrupal.org/
     Drupal\DrupalExtension\Extension:
       blackbox: ~</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="one/01_slide/25">
-<h1>Roadmap</h1></div>
+</div><div class="slide" data-transition="none"><div class="content center small" ref="one/01_slide/25">
+<h1>Getting started with the Drupal Extension</h1>
+
+<p>List of available step definitions</p>
+
+<pre class="sh_sh"><code>bin/behat -dl</code></pre>
+
+<p class="notes">Live demo</p></div>
 </div><div class="slide" data-transition="none"><div class="content center" ref="one/01_slide/26">
+<h1>Roadmap</h1></div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="one/01_slide/27">
 <h1>Roadmap</h1>
 
 <ul>
@@ -326,7 +341,7 @@ Scenario: No php filter for comments
 
 
 <p>(Will be ongoing)</p></div>
-</div><div class="slide" data-transition="none"><div class="content center small bullets incremental" ref="one/01_slide/27">
+</div><div class="slide" data-transition="none"><div class="content center small bullets incremental" ref="one/01_slide/28">
 <h1>Roadmap</h1>
 
 <p>Provide multiple ways of manipulating the backend (Drivers).</p>
@@ -341,11 +356,11 @@ Scenario: No php filter for comments
 <li>Services</li>
 </ul>
 </div>
-</div><div class="slide" data-transition="none"><div class="content center" ref="one/01_slide/28">
+</div><div class="slide" data-transition="none"><div class="content center" ref="one/01_slide/29">
 <h1>Roadmap</h1>
 
 <p>Support multiple major versions of Drupal</p></div>
-</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="one/01_slide/29">
+</div><div class="slide" data-transition="none"><div class="content center bullets incremental" ref="one/01_slide/30">
 <h1>Roadmap</h1>
 
 <ul>
@@ -353,7 +368,7 @@ Scenario: No php filter for comments
 <li>Complex features can have common step-definitions (think Media, or Views)</li>
 </ul>
 </div>
-</div><div class="slide" data-transition="none"><div class="content small" ref="one/01_slide/30">
+</div><div class="slide" data-transition="none"><div class="content small" ref="one/01_slide/31">
 <h1>Thank you!</h1>
 
 <h2>Questions?</h2>
