@@ -16,11 +16,9 @@
 
 ## Use a distribution as core
 
-   ```
-   core = 7.x
-   projects[commerce_kickstart][type] = "core"
-   projects[commerce_kickstart][version] = "7.x-1.19"
-   ```
+    core = 7.x
+    projects[commerce_kickstart][type] = "core"
+    projects[commerce_kickstart][version] = "7.x-1.19"
 
 ## Quick Drupal can use a makefile
 
@@ -30,13 +28,9 @@
 
 ## Set defaults
 
-   ```
-   defaults[projects][subdir] = "contrib"
-   ```
+    defaults[projects][subdir] = "contrib"
    
-   instead of
+instead of
    
-   ```
-   projects[foo][subdir] = "contrib"
-   projects[bar][subdir] = "contrib"
-   ```
+    projects[foo][subdir] = "contrib"
+    projects[bar][subdir] = "contrib"
