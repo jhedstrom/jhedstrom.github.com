@@ -1,15 +1,15 @@
 ## drush[make]
 
-   ```
-   api = 2
-   core = "7.x"
+    ```
+    api = 2
+    core = "7.x"
    
-   projects[ctools][version] = "1.3"
-   ; http://drupal.org/node/1120028#comment-5792282
-   projects[ctools][patch][] = "http://drupal.org/files/patch-1.patch"
-   ; https://drupal.org/node/1417630#comment-6810906
-   projects[ctools][patch][] = "https://drupal.org/files/patch-2.patch"
-   ```
+    projects[ctools][version] = "1.3"
+    ; http://drupal.org/node/1120028#comment-5792282
+    projects[ctools][patch][] = "http://drupal.org/files/patch-1.patch"
+    ; https://drupal.org/node/1417630#comment-6810906
+    projects[ctools][patch][] = "https://drupal.org/files/patch-2.patch"
+    ```
 
 ## New for 6.x (most backported to 5.x)
 
