@@ -1,0 +1,42 @@
+<h2>drush[make]</h2>
+
+<p>```
+   api = 2
+   core = "7.x"</p>
+
+<p>projects[ctools][version] = "1.3"
+   ; http://drupal.org/node/1120028#comment-5792282
+   projects[ctools][patch][] = "http://drupal.org/files/patch-1.patch"
+   ; https://drupal.org/node/1417630#comment-6810906
+   projects[ctools][patch][] = "https://drupal.org/files/patch-2.patch"
+   ```</p>
+
+<h2>New for 6.x (most backported to 5.x)</h2>
+
+<ul>
+<li>Local patches (patch copied into project directory)</li>
+<li><p>Use a distribution as core</p>
+
+<p><code>
+core = 7.x
+projects[commerce_kickstart][type] = "core"
+projects[commerce_kickstart][version] = "7.x-1.19"
+</code></p></li>
+<li><p>Quick Drupal can use a makefile</p>
+
+<p><code>
+drush qd --makefile=mysite.make
+</code></p></li>
+<li><p>Set defaults</p>
+
+<p><code>
+defaults[projects][subdir] = "contrib"
+</code></p>
+
+<p>instead of</p>
+
+<p><code>
+projects[foo][subdir] = "contrib"
+projects[bar][subdir] = "contrib"
+</code></p></li>
+</ul>
