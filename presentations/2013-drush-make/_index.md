@@ -12,7 +12,8 @@
 ## New for 6.x
 ### (most backported to 5.x)
 
-## Local patches (patch copied into project directory)
+## Local patches
+### (patch copied into project directory)
 
 ## Use a distribution as core
 
