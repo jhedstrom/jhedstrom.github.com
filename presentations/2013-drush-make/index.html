@@ -18,11 +18,10 @@ projects[ctools][patch][] = "https://drupal.org/files/patch-2.patch"
 
 <h2>Use a distribution as core</h2>
 
-<p><code>
-   core = 7.x
-   projects[commerce_kickstart][type] = "core"
-   projects[commerce_kickstart][version] = "7.x-1.19"
-</code></p>
+<pre><code>core = 7.x
+projects[commerce_kickstart][type] = "core"
+projects[commerce_kickstart][version] = "7.x-1.19"
+</code></pre>
 
 <h2>Quick Drupal can use a makefile</h2>
 
@@ -30,15 +29,19 @@ projects[ctools][patch][] = "https://drupal.org/files/patch-2.patch"
    drush qd --makefile=mysite.make
 </code></p>
 
+<h2>Per-project working-directory</h2>
+
+<pre><code>projects[caption_filter][download][revision] = "c9794cf"
+projects[caption_filter][download][working-copy] = 1
+</code></pre>
+
 <h2>Set defaults</h2>
 
-<p><code>
-   defaults[projects][subdir] = "contrib"
-</code></p>
+<pre><code>defaults[projects][subdir] = "contrib"
+</code></pre>
 
 <p>instead of</p>
 
-<p><code>
-   projects[foo][subdir] = "contrib"
-   projects[bar][subdir] = "contrib"
-</code></p>
+<pre><code>projects[foo][subdir] = "contrib"
+projects[bar][subdir] = "contrib"
+</code></pre>
