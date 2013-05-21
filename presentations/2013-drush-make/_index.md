@@ -26,6 +26,11 @@
    drush qd --makefile=mysite.make
    ```
 
+## Per-project working-directory
+
+    projects[caption_filter][download][revision] = "c9794cf"
+    projects[caption_filter][download][working-copy] = 1
+
 ## Set defaults
 
     defaults[projects][subdir] = "contrib"
