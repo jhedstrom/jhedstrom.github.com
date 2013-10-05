@@ -14,10 +14,9 @@ Contents:
    0-foundation.rst 
    1-features.rst
    2-scenarios.rst
-   3-simplify.rst  
-   4-commandline.rst
-   5-behatmink.rst
    6-drupalextension.rst 
+   7-drupal9.rst
+   8-fin.rst
 
 Indices and tables
 ==================
