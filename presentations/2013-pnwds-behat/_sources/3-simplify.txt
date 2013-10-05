@@ -1,0 +1,247 @@
+Simplify
+========
+
+Gherkin provides some ways to improve readability:
+
+Backgrounds
+    When scenarios share the same Given conditions
+
+Scenario Outline
+    When several options need to be tried in the same format
+
+Tables
+    When several repetitive checks need to be made on the same page
+
+Backgrounds: Gherkin
+====================
+
+Several scenarios that all share the same setup can share a background.
+
+
+.. rst-class:: column-1 build
+
+.. code-block:: gherkin
+   :linenos:
+   :emphasize-lines: 2,3,8,9
+
+      Scenario: Access workbench
+        Given I am logged in as "editor"
+        And I am on the homepage
+        When I click "workbench"
+        Then I should see "My articles"
+
+      Scenario: Access admin list
+        Given I am logged in as "editor"
+        And I am on the homepage
+        When I click "Content"
+        Then I should not see "Access denied"
+        And I should see "Content" 
+        
+.. rst-class:: column-2 build
+
+.. code-block:: gherkin
+   :linenos:
+   :emphasize-lines: 2,3
+
+      Background:
+        Given I am logged in as "editor"
+        And I am on the homepage
+
+      Scenario: Access workbench
+        When I click "Workbench"
+        Then I should see "My Articles" 
+
+      Scenario: Access admin list
+        When I click "Content"
+        Then I should not see "Access denied"
+        And I should see "My Articles"
+
+
+.. rst-class:: build
+
+  * The background steps will be run at the beginning of each scenario 
+
+  * You can add more background in each individual scenario
+
+
+Scenario Outlines: Gherkin
+==========================
+
+* Datasets that have the same format can use a scenario outline. 
+* Each line in the table represents an entire scenario. 
+
+  * Background statements will be run
+  * All steps leading up will run 
+  * The values from the table will be plugged in
+* New key words: Scenario Outline / Examples;
+
+
+Before the Scenario Outline
+===========================
+
+.. code-block:: gherkin
+   :linenos:
+   :emphasize-lines: 3,4,8,9,13,14
+
+    Scenario: Purchase plan
+      Given I am on "/signup"
+      When I select the "yearly" plan
+      Then I should see "Payment Option: "Yearly"
+
+    Scenario: Purchase plan
+      Given I am on "/signup"
+      When I select the "bi-annual" plan
+      Then I should see "Payment Option: Bi-annual"
+
+    Scenario: Purchase plan
+      Given I am on "/signup"
+      When I select the "monthly" plan
+      Then I should see "Payment Option: Monthly"
+
+After the Scenario Outline
+==========================
+
+.. code-block:: gherkin
+   :linenos:
+   :emphasize-lines: 1, 6
+
+    Scenario Outline: Purchase plan
+      Given I am on "/signup"
+      When I select the "<plan>" plan
+      Then I should see "<text>"
+
+      Examples:
+      | plan      | text                      |
+      | yearly    | Payment Option: Yearly    |
+      | bi-annual | Payment Option: Bi-annual |
+      | monthly   | Payment Option: Monthly   |
+
+This will run as three complete scenarios, one for each line
+
+Tables: Custom
+==============
+
+You can introduce custom steps to allow tables.
+
+These tables will NOT cause the scenario to be re-run. 
+
+Instead, they'll look for or act on elements on the same page
+
+.. image:: _static/plans.png
+   :width: 775 px
+
+Before Tables
+=============
+
+This scenario is wordy and redundant (but automated!) 
+
+.. code-block:: gherkin
+
+  Scenario: Plans from the homepage - automatable
+    Given I am on the homepage
+    When I click "Pricing & Signup"
+    Then I should see the heading "Start learning Drupal now!"
+    And I should see "Yearly"
+    And I should see "Bi-annual"
+    And I should see "Monthly"
+    And I should see "$420"
+    And I should see "$240"
+    And I should see "$45"      
+
+After Tables
+============
+
+This is easier to scan
+
+.. code-block:: gherkin
+
+  Scenario: Plans from the homepage - less redundant
+    Given I am on "/signup"
+    Then I should see the following <text>:
+
+    |text      |
+    |Yearly    |
+    |Bi-annual |
+    |Monthly   |
+    |$420      |
+    |$240      | 
+    |$45       |
+
+This is just a single scenario. Note the absense of the key words Scenario Outling and Examples
+
+Custom code to support this table step:
+=======================================
+
+.. code-block:: php
+
+  <?php
+
+  /**
+  * Check for several text values on a single page using a table of values
+  *
+  * @Then /^I (?:should |)see the following <text>:$/
+  */
+  public function iShouldSeeTheFollowingText(TableNode $table) {
+    $page = $this->getSession()->getPage();
+    $table = $table->getHash();
+      foreach ($table as $key => $value) {
+      $text = $table[$key]['text'];
+        if($page->hasContent($text) === FALSE) {
+        throw new \Exception(sprintf("The text '%s' was not found", $text));
+        }
+      }
+    } 
+
+   ?>
+
+
+Better custom code to support this step
+=======================================
+
+The previous snippet fails the first time a piece of text doesn't match, but since they're not dependent, a better approach is to return the success or failue of all the checks:
+
+.. rst-class:: small 
+
+.. code-block:: php
+   :linenos:
+
+    <? 
+      /**
+       * @Given /^I (?:should |)see the following <texts>$/
+       */
+      public function iShouldSeeTheFollowingTexts(TableNode $table) {
+        $page = $this->getSession()->getPage();
+        $messages = array();
+        $failure_detected = FALSE;
+        $table = $table->getHash();
+        foreach ($table as $key => $value) {
+          $text = $table[$key]['texts'];
+          if($page->hasContent($text) === FALSE) {
+            $messages[] = "FAILED: The text '" . $text . "' was not found";
+            $failure_detected = TRUE;
+          } else {
+            $messages[] = "PASSED: '" . $text . "'";
+          }
+        }
+        if ($failure_detected) {
+          throw new Exception(implode("\n", $messages));
+        }
+      }
+    ?>
+
+FeatureContext
+==============
+
+.. rst-class:: bullets
+
+* FeatureContext maps the steps of every .feature file in your features directory to the actual php code.
+
+  * Feature files are a description of business rules
+  * The FeatureContext is the description of how to actually test them.
+
+
+Exception = Failure
+===================
+
+* The custom code will return success until an exception is thrown
+* If the definition method doesn't throw an exception, the step gets marked as passing

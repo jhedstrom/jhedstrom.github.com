@@ -1,0 +1,367 @@
+The Drupal Extension
+====================
+
+.. rst-class:: column-1
+
+  * Overrides default behaviors:
+
+    * Snippets follow Drupal coding standards
+    * Mink Extension steps get synonyms for readability
+
+  * Provides drivers to facilitate data setup
+
+    * Blackbox
+    * Drush
+    * Drupal API
+
+
+.. rst-class:: column-2
+
+  * Adds support for Drupal:
+
+    * Regions
+    * Node types
+    * Users and Roles
+    * Taxonomy
+    * Subcontexts for Contributed Modules
+
+.. image:: _static/behatdrupal.jpg
+   :align: center
+
+
+Provides drivers for data set up
+================================
+
+.. rst-class:: build bullet
+
+* Works with Drupal 6, 7, and 8
+* Connect with no privileges (local or remote)
+* Connect with Drush (local or remote)
+* Connect with the Drupal API (local only)
+
+About data setup
+================
+
+.. rst-class:: build bullet
+
+* Every scenario must be able to run independent of other scenarios
+* Often work with a fresh copy of the production database
+* Can't always assume the database has specific content
+* Separate architectural elements from content elements
+* Insert data to get reliable checks
+
+Drush: alias file
+-----------------
+
+# ~melissa/.drush/myaliases.drushrc.php
+
+.. code-block:: php
+
+  <?php 
+
+  $aliases['seven'] = array(
+    'root' => '/var/www/seven/drupal',
+    'uri' =>  'seven.l',
+  );
+
+Drush: behat.yml
+----------------
+
+.. code-block:: yaml
+  :linenos:
+  :emphasize-lines: 11, 12
+
+  default:
+    paths:
+      features: 'features'
+    extensions:
+      Behat\MinkExtension\Extension:
+        goutte: ~
+        selenium2: ~
+        base_url: 'http://drupal.l'
+      Drupal\DrupalExtension\Extension:
+        blackbox: ~
+        drush:
+          alias: 'seven'
+
+
+Drupal API: behat.yml
+---------------------
+
+.. code-block:: yaml
+  :linenos:
+  :emphasize-lines: 13-14
+
+  default:
+    paths:
+      features: 'features'
+    extensions:
+      Behat\MinkExtension\Extension:
+        goutte: ~
+        selenium2: ~
+        base_url: http://drupal.l
+        show_cmd: firefox %s
+      Drupal\DrupalExtension\Extension:
+        blackbox: ~
+        api_driver: "drupal"
+        drupal:
+          drupal_root: "/var/www/seven/drupal"
+
+Regions
+-------
+
+* Requires a map in the behat.yml file
+
+.. code-block:: gherkin
+
+  Given I press "Search" in the "Header" region
+  Given I fill in "Foo" for "Search" in the "Header"
+  Given I fill in "Search" with "Foo" in the "Header"
+  When I follow "My link" in the "right sidebar"
+  Then I should see the error message containing "An error message"
+  Then I should see the following error "An error message"
+  Then I should see the error message containing "a partial error message"
+  Then I should not see the following error "an error message"
+  Then I should see the success message "something happened!"
+
+Regions
+-------
+
+Structure > Blocks > (Theme) > Demonstrate block regions
+
+.. image:: _static/drupal-regions-bartik.png
+   :height: 400
+
+
+Region map: behat.yml
+---------------------
+
+.. code-block:: yaml
+  :linenos:
+  :emphasize-lines: 11-25
+
+  default:
+    paths:
+      features: 'features'
+    extensions:
+      Behat\MinkExtension\Extension:
+        goutte: ~
+        selenium2: ~
+        base_url: http://drupal.l
+      Drupal\DrupalExtension\Extension:
+        blackbox: ~
+        region_map:
+          Header: '.region-header'
+          Featured: '.region-featured'
+          Sidebar first: '.region-sidebar-first'
+          Left sidebar: '.region-sidebar-first'
+          Sidebar second: '.region-sidebar-second'
+          Highlighted: '.region-highlighted'
+          Help: '.region-content'
+          Content: '.region-content'
+          Tryptych first: '.region-triptych-first'
+          Triptych middle: '.region-triptych-first'
+          Triptych last: '.region-triptych-first'
+          Footer first column: '.region-footer-firstcolumn'
+          Footer second column: '.region-footer-secondcolumn'
+          Footer third column:  '.region-footer-thirdcolumn'
+          Footer fourth column: '.region-footer-fourthcolumn'
+          Footer: '.region-footer'
+
+Regions
+-------
+
+ * ``label`` => ``css selector``
+ * This means regions don't have to map directly to *Drupal theme* regions
+
+Nodes
+-----
+
+.. code-block:: gherkin
+
+   Given I am viewing an "article" node with the title "My title"
+   Given a "page" node with the title "About"
+   Given I am viewing my "Article" node with the title "My latest blog"
+   Given "Page" nodes:
+   | title      | body                    |
+   | About      | An about page           |
+   | Contact Us | Our contact information |
+   Given I am viewing an "article" node:
+   | title       | My title             |
+   | body        | Some article content |
+   | author      | Joe Author           |
+   | field_image | image.png            |
+   Then I should be able to edit an "article" node
+
+
+Users & Roles
+-------------
+
+.. code-block:: gherkin
+
+  Given I am an anonymous user
+  Given I am not logged in
+  Given I am logged in as a user with the "administrator" role
+  Given users:
+  | name  | mail              |
+  | Joe   | joe@example.com   |
+  | Sally | sally@example.com |
+  Given I am logged in as "Joe"
+
+
+Taxonomy
+--------
+
+.. code-block:: gherkin
+
+  Given I am viewing a "tags" term with the name "Category 1"
+  Given a "tags" term with the name "Category 2"
+  Given "tags" term:
+  | name       |
+  | Category 3 |
+  | Category 4 |
+  Given I click "manage fields" in the "Article" row # Not specific to taxonomy
+
+And more
+========
+
+.. code-block:: gherkin
+
+   * @Given /^I should not see the error message(?:| containing) "([^"]*)"$/
+   * @Given /^I should not see the success message(?:| containing) "([^"]*)"$/
+   * @Given /^the cache has been cleared$/
+   * @Given /^I run cron$/
+
+And yet more: 
+=============
+
+.. code-block:: gherkin
+
+   * @Then /^I should see the link "(?P<link>[^"]*)"$/
+   * @Then /^I should not see the link "(?P<link>[^"]*)"$/
+   * @Then /^I (?:\\|should )see the heading "(?P<heading>[^"]*)"$/
+   * @Then /^(?:I|I should) see the text "(?P<text>[^"]*)"$/
+   * @Then /^I should not see the text "(?P<text>[^"]*)"$/
+   * @When /^I visit "(?P<path>[^"]*)"$/
+   * @When /^I click "(?P<link>[^"]*)"$/
+   * @When /^I press the "(?P<button>[^"]*)" button$/
+
+Note: The source for these is located at vendor/drupal/drupal-extension/src/Drupal/DrupalExtension/Context/DrupalContext.php
+
+Loads module-specific step definitions
+======================================
+
+.. rst-class:: build bullet
+
+* Define one or more directories that contain step definitions in the ``behat.yml``
+* The Drupal Extension recursively searches for \*.behat.inc
+
+* Not yet widely adopted
+
+Subcontexts: behat.yml
+----------------------
+
+Load subcontexts from outside Drupal root. Be sure to change the path for your system
+
+.. code-block:: yaml
+  :linenos:
+  :emphasize-lines: 12
+
+  default:
+    paths:
+      features: 'features'
+    extensions:
+      Behat\MinkExtension\Extension:
+        goutte: ~
+        selenium2: ~
+        base_url: http://drupal.l
+      Drupal\DrupalExtension\Extension:
+        blackbox: ~
+        subcontexts:
+          paths:
+            - "/path/to/subcontexts/outside/of/drupal/"
+
+
+Configurable strings
+====================
+
+.. code-block:: yaml
+  :linenos:
+  :emphasize-lines: 3-6
+
+   Drupal\DrupalExtension\Extension:
+     text:
+	   log_out: "Sign out"
+	   log_in: "Sign in"
+	   password_field: "Enter your password"
+	   username_field: "Nickname"
+
+Alter nodes, users, terms prior to saving
+=========================================
+
+Normally, to create a node.
+
+.. code-block:: gherkin
+
+    Given "article" nodes:
+    | title        | body             | created            | status | promote |
+    | Test article | PLACEHOLDER BODY | 07/27/2014 12:03am |      1 |       1 |
+
+Note, **created**.
+
+
+Alter nodes, users, terms prior to saving
+=========================================
+
+.. code-block:: gherkin
+
+    Given "article" nodes:
+    | title        | body        | published on       | status | promote |
+    | Test article | PLACEHOLDER | 04/27/2013 11:11am |      1 |       1 |
+
+Note, **published on**.
+
+Alter nodes, users, terms prior to saving
+=========================================
+
+.. code-block:: php
+
+  <?php
+  /**
+   * Hook into node creation to test `@beforeNodeCreate`
+   *
+   * @beforeNodeCreate
+   */
+  public function alterNodeParameters(EntityEvent $event) {
+    // Change 'published on' to the expected 'created'.
+    $node = $event->getEntity();
+    if (isset($node->{"published on"})) {
+      $node->created = $node->{"published on"};
+      unset($node->{"published on"});
+    }
+  }
+
+Also available:
+
+ * ``@beforeTermCreate``
+ * ``@beforeUserCreate``
+
+Relational data
+===============
+
+.. code-block:: gherkin
+
+    Given "tags" terms:
+    | name      |
+    | Tag one   |
+    | Tag two   |
+    | Tag three |
+    | Tag four  |
+    And users:
+    | name |
+    | Joe  |
+    | Mike |
+    And "article" nodes:
+    | title              | field_tags                  | author |
+    | An article by Joe  | Tag one, Tag two, Tag three | Joe    |
+    | An article by Mike | Tag four                    | Mike   |

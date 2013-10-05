@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Quality Assurance using Behat and the Drupal Extension &mdash; Quality Assurance using Behat and the Drupal Extension 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Quality Assurance using Behat and the Drupal Extension 1 documentation" href="index.html" />
+    <link rel="next" title="Gherkin Feature Stanzas" href="1-features.html" />
+    <link rel="prev" title="Welcome to BDD for Projects’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="1-features.html" title="Gherkin Feature Stanzas"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to BDD for Projects’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Quality Assurance using Behat and the Drupal Extension 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="quality-assurance-using-behat-and-the-drupal-extension">
+<h1>Quality Assurance using Behat and the Drupal Extension<a class="headerlink" href="#quality-assurance-using-behat-and-the-drupal-extension" title="Permalink to this headline">¶</a></h1>
+<p class="level-2">Presented by: Melissa Anderson &amp; Jonathan Hedstrom</p>
+<ul class="column-1 byline">
+<li><p class="first">drupal.org: eliza411</p>
+</li>
+<li><p class="first">twitter: lz411</p>
+</li>
+<li><a class="first reference internal image-reference" href="_images/melissa.jpg"><img alt="_images/melissa.jpg" class="align-center" src="_images/melissa.jpg" style="width: 200px;" /></a>
+</li>
+</ul>
+<ul class="column-2 byline">
+<li><p class="first">drupal.org: jhedstrom</p>
+</li>
+<li><p class="first">twitter: jhedstro</p>
+</li>
+<li><a class="first reference internal image-reference" href="_images/jonathan.jpg"><img alt="_images/jonathan.jpg" class="align-center" src="_images/jonathan.jpg" style="width: 200px;" /></a>
+</li>
+</ul>
+</div>
+<div class="section" id="because-drupal-has">
+<h1>Because Drupal has:<a class="headerlink" href="#because-drupal-has" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>Powerful value added by non-developers</li>
+<li>Complex module interactivity</li>
+<li>Frequent security updates with functionality changes</li>
+</ul>
+</div>
+<div class="section" id="we-need-to">
+<h1>We need to:<a class="headerlink" href="#we-need-to" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>Know how users are expected to move through the application</li>
+<li>Know how the application is expected to respond</li>
+<li>Keep that knowledge in sync with changes</li>
+<li>Test that those user paths work</li>
+</ul>
+</div>
+<div class="section" id="because-our-applications-are">
+<h1>Because our applications are:<a class="headerlink" href="#because-our-applications-are" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>dependent on third-party libraries</li>
+<li>integrated with third-party services</li>
+<li>highly visible</li>
+<li>globally accessible</li>
+</ul>
+</div>
+<div class="section" id="we-need-to-be-able-to">
+<h1>We need to be able to:<a class="headerlink" href="#we-need-to-be-able-to" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>Develop rapidly</li>
+<li>Deploy frequently</li>
+</ul>
+</div>
+<div class="section" id="describe">
+<h1>Describe<a class="headerlink" href="#describe" title="Permalink to this headline">¶</a></h1>
+<p>Our goal is to describe application behavior in a way ...</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Feature:</span><span class="nf"> Forum posts on front page</span>
+<span class="nf">  In order to see recent activity and news in the forums</span>
+<span class="nf">  As any user</span>
+<span class="nf">  I should be able to view links to the latest forum posts on the front page</span>
+
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Forum Posts tab on front page</span>
+<span class="k">    Given </span><span class="nf">there is a new &quot;</span><span class="s">Paid Drupal services</span><span class="nf">&quot; forum topic</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the cache is cleared</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">I am on the homepage</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I follow &quot;</span><span class="s">Forum Posts</span><span class="nf">&quot;</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">I should see the forum topic link</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">I should see the link &quot;</span><span class="s">More forums</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="automate">
+<h1>Automate<a class="headerlink" href="#automate" title="Permalink to this headline">¶</a></h1>
+<p>...that we can turn into automated, browser-clicking functional tests:</p>
+<a href="file:///home/melissa/Downloads/drupalorgforum-edited.mp4"><img src="_static/video.png" width="256" height="256"></a></div>
+<div class="section" id="from-a-bdd-perspective">
+<h1>From a BDD Perspective<a class="headerlink" href="#from-a-bdd-perspective" title="Permalink to this headline">¶</a></h1>
+<ul class="build simple">
+<li>Automatable functional tests are <em>only</em> a bonus<ul>
+<li>They are <strong>not</strong> the primary goal of BDD</li>
+<li>They do <strong>not</strong> replace unit tests</li>
+</ul>
+</li>
+<li>BDD is about<ul>
+<li>Discovering what we need to build</li>
+<li>Ensuring what we build has value</li>
+<li>When we test, focusing our tests on the <em>right</em> things</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="types-of-testing">
+<h1>Types of Testing<a class="headerlink" href="#types-of-testing" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>Unit Testing (Classes or methods)</li>
+<li>Integration Testing (Multiple classes interacting)</li>
+<li>Functional Testing (Automated testing against acceptance criteria)</li>
+<li>GUI Testing (Automated testing in a graphical brower)</li>
+<li>Manual Testing (Human click-testing)</li>
+</ul>
+</div>
+<div class="section" id="at-the-core">
+<h1>At the Core<a class="headerlink" href="#at-the-core" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>TDD tests tell programmers their code is working</li>
+<li>BDD tests ensure that the application is delivering business value</li>
+<li><a class="reference external" href="http://www.tomslabs.com/index.php/2011/04/test-automation-strategy/">http://www.tomslabs.com/index.php/2011/04/test-automation-strategy/</a></li>
+</ul>
+</div>
+<div class="section" id="dealing-with-technical-debt">
+<h1>Dealing with Technical Debt<a class="headerlink" href="#dealing-with-technical-debt" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="_images/triangle-debt.png"><img alt="_images/triangle-debt.png" class="align-center" src="_images/triangle-debt.png" style="width: 600px;" /></a>
+<p><a class="reference external" href="http://www.matthewbussa.com/2011/01/evolution-of-automated-testing.html">http://www.matthewbussa.com/2011/01/evolution-of-automated-testing.html</a></p>
+</div>
+<div class="section" id="building-a-solid-foundation">
+<h1>Building a Solid Foundation<a class="headerlink" href="#building-a-solid-foundation" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="_images/triangle.png"><img alt="_images/triangle.png" class="align-center" src="_images/triangle.png" style="width: 600px;" /></a>
+</div>
+<div class="section" id="the-roots-of-bdd-test-driven-development">
+<h1>The Roots of BDD: Test-Driven Development<a class="headerlink" href="#the-roots-of-bdd-test-driven-development" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Cycle:<ul>
+<li>Add a test</li>
+<li>Run tests and see the new one fail</li>
+<li>Write some code</li>
+<li>Run the automated tests and see them succeed</li>
+<li>Refactor code</li>
+<li>Repeat</li>
+</ul>
+</li>
+<li>Purpose<ul>
+<li>Encourage simple designs</li>
+<li>Facilitate short release cycles</li>
+<li>Provide higher confidence in releases</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="behavior-driven-development">
+<h1>Behavior-Driven Development<a class="headerlink" href="#behavior-driven-development" title="Permalink to this headline">¶</a></h1>
+<p>Behavior-driven development emerged from test-driven development, to answer these questions:</p>
+<ul class="build bullet simple">
+<li>Where do I start?</li>
+<li>What do I test?</li>
+<li>How much do I test in one go?</li>
+<li>What do I call the tests?</li>
+<li>How can I understand why a test fails?</li>
+</ul>
+</div>
+<div class="section" id="fundamental-principles-of-story-bdd">
+<h1>Fundamental Principles of Story BDD<a class="headerlink" href="#fundamental-principles-of-story-bdd" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ignorance">
+<h2>Ignorance<a class="headerlink" href="#ignorance" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div><p>Ignorance is the biggest constraint in software development</p>
+<p class="attribution">&mdash;Dan North</p>
+</div></blockquote>
+</div>
+<div class="section" id="value">
+<h2>Value<a class="headerlink" href="#value" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div>Every feature should have a measurable business value</div></blockquote>
+</div>
+<div class="section" id="communication">
+<h2>Communication<a class="headerlink" href="#communication" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div>Everyone on the team should have a common language to describe the site</div></blockquote>
+</div>
+<div class="section" id="conversation">
+<h2>Conversation<a class="headerlink" href="#conversation" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div><blockquote>
+<div><div class="line-block">
+<div class="line">Having conversations</div>
+<div class="line">is more important than</div>
+<div class="line">Capturing conversations</div>
+<div class="line">is more important than</div>
+<div class="line">Automating conversations</div>
+</div>
+</div></blockquote>
+<p class="attribution">&mdash;Liz Keough</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Quality Assurance using Behat and the Drupal Extension</a></li>
+<li><a class="reference internal" href="#because-drupal-has">Because Drupal has:</a></li>
+<li><a class="reference internal" href="#we-need-to">We need to:</a></li>
+<li><a class="reference internal" href="#because-our-applications-are">Because our applications are:</a></li>
+<li><a class="reference internal" href="#we-need-to-be-able-to">We need to be able to:</a></li>
+<li><a class="reference internal" href="#describe">Describe</a></li>
+<li><a class="reference internal" href="#automate">Automate</a></li>
+<li><a class="reference internal" href="#from-a-bdd-perspective">From a BDD Perspective</a></li>
+<li><a class="reference internal" href="#types-of-testing">Types of Testing</a></li>
+<li><a class="reference internal" href="#at-the-core">At the Core</a></li>
+<li><a class="reference internal" href="#dealing-with-technical-debt">Dealing with Technical Debt</a></li>
+<li><a class="reference internal" href="#building-a-solid-foundation">Building a Solid Foundation</a></li>
+<li><a class="reference internal" href="#the-roots-of-bdd-test-driven-development">The Roots of BDD: Test-Driven Development</a></li>
+<li><a class="reference internal" href="#behavior-driven-development">Behavior-Driven Development</a></li>
+<li><a class="reference internal" href="#fundamental-principles-of-story-bdd">Fundamental Principles of Story BDD</a><ul>
+<li><a class="reference internal" href="#ignorance">Ignorance</a></li>
+<li><a class="reference internal" href="#value">Value</a></li>
+<li><a class="reference internal" href="#communication">Communication</a></li>
+<li><a class="reference internal" href="#conversation">Conversation</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to BDD for Projects&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="1-features.html"
+                        title="next chapter">Gherkin Feature Stanzas</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/0-foundation.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="1-features.html" title="Gherkin Feature Stanzas"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to BDD for Projects’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">Quality Assurance using Behat and the Drupal Extension 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Melissa Anderson and Jonathan Hedstrom.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1026 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Quality Assurance using Behat and the Drupal Extension &mdash; Quality Assurance using Behat and the Drupal Extension 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Quality Assurance using Behat and the Drupal Extension 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Quality Assurance using Behat and the Drupal Extension 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="quality-assurance-using-behat-and-the-drupal-extension">
+<h1>Quality Assurance using Behat and the Drupal Extension<a class="headerlink" href="#quality-assurance-using-behat-and-the-drupal-extension" title="Permalink to this headline">¶</a></h1>
+<p class="level-2">Presented by: Melissa Anderson &amp; Jonathan Hedstrom</p>
+<ul class="column-1 byline">
+<li><p class="first">drupal.org: eliza411</p>
+</li>
+<li><p class="first">twitter: lz411</p>
+</li>
+<li><a class="first reference internal image-reference" href="_images/melissa.jpg"><img alt="_images/melissa.jpg" class="align-center" src="_images/melissa.jpg" style="width: 200px;" /></a>
+</li>
+</ul>
+<ul class="column-2 byline">
+<li><p class="first">drupal.org: jhedstrom</p>
+</li>
+<li><p class="first">twitter: jhedstro</p>
+</li>
+<li><a class="first reference internal image-reference" href="_images/jonathan.jpg"><img alt="_images/jonathan.jpg" class="align-center" src="_images/jonathan.jpg" style="width: 200px;" /></a>
+</li>
+</ul>
+</div>
+<div class="section" id="because-drupal-has">
+<h1>Because Drupal has:<a class="headerlink" href="#because-drupal-has" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>Powerful value added by non-developers</li>
+<li>Complex module interactivity</li>
+<li>Frequent security updates with functionality changes</li>
+</ul>
+</div>
+<div class="section" id="we-need-to">
+<h1>We need to:<a class="headerlink" href="#we-need-to" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>Know how users are expected to move through the application</li>
+<li>Know how the application is expected to respond</li>
+<li>Keep that knowledge in sync with changes</li>
+<li>Test that those user paths work</li>
+</ul>
+</div>
+<div class="section" id="because-our-applications-are">
+<h1>Because our applications are:<a class="headerlink" href="#because-our-applications-are" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>dependent on third-party libraries</li>
+<li>integrated with third-party services</li>
+<li>highly visible</li>
+<li>globally accessible</li>
+</ul>
+</div>
+<div class="section" id="we-need-to-be-able-to">
+<h1>We need to be able to:<a class="headerlink" href="#we-need-to-be-able-to" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>Develop rapidly</li>
+<li>Deploy frequently</li>
+</ul>
+</div>
+<div class="section" id="describe">
+<h1>Describe<a class="headerlink" href="#describe" title="Permalink to this headline">¶</a></h1>
+<p>Our goal is to describe application behavior in a way ...</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Feature:</span><span class="nf"> Forum posts on front page</span>
+<span class="nf">  In order to see recent activity and news in the forums</span>
+<span class="nf">  As any user</span>
+<span class="nf">  I should be able to view links to the latest forum posts on the front page</span>
+
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Forum Posts tab on front page</span>
+<span class="k">    Given </span><span class="nf">there is a new &quot;</span><span class="s">Paid Drupal services</span><span class="nf">&quot; forum topic</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the cache is cleared</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">I am on the homepage</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I follow &quot;</span><span class="s">Forum Posts</span><span class="nf">&quot;</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">I should see the forum topic link</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">I should see the link &quot;</span><span class="s">More forums</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="automate">
+<h1>Automate<a class="headerlink" href="#automate" title="Permalink to this headline">¶</a></h1>
+<p>...that we can turn into automated, browser-clicking functional tests:</p>
+<a href="file:///home/melissa/Downloads/drupalorgforum-edited.mp4"><img src="_static/video.png" width="256" height="256"></a></div>
+<div class="section" id="from-a-bdd-perspective">
+<h1>From a BDD Perspective<a class="headerlink" href="#from-a-bdd-perspective" title="Permalink to this headline">¶</a></h1>
+<ul class="build simple">
+<li>Automatable functional tests are <em>only</em> a bonus<ul>
+<li>They are <strong>not</strong> the primary goal of BDD</li>
+<li>They do <strong>not</strong> replace unit tests</li>
+</ul>
+</li>
+<li>BDD is about<ul>
+<li>Discovering what we need to build</li>
+<li>Ensuring what we build has value</li>
+<li>When we test, focusing our tests on the <em>right</em> things</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="types-of-testing">
+<h1>Types of Testing<a class="headerlink" href="#types-of-testing" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>Unit Testing (Classes or methods)</li>
+<li>Integration Testing (Multiple classes interacting)</li>
+<li>Functional Testing (Automated testing against acceptance criteria)</li>
+<li>GUI Testing (Automated testing in a graphical brower)</li>
+<li>Manual Testing (Human click-testing)</li>
+</ul>
+</div>
+<div class="section" id="at-the-core">
+<h1>At the Core<a class="headerlink" href="#at-the-core" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>TDD tests tell programmers their code is working</li>
+<li>BDD tests ensure that the application is delivering business value</li>
+<li><a class="reference external" href="http://www.tomslabs.com/index.php/2011/04/test-automation-strategy/">http://www.tomslabs.com/index.php/2011/04/test-automation-strategy/</a></li>
+</ul>
+</div>
+<div class="section" id="dealing-with-technical-debt">
+<h1>Dealing with Technical Debt<a class="headerlink" href="#dealing-with-technical-debt" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="_images/triangle-debt.png"><img alt="_images/triangle-debt.png" class="align-center" src="_images/triangle-debt.png" style="width: 600px;" /></a>
+<p><a class="reference external" href="http://www.matthewbussa.com/2011/01/evolution-of-automated-testing.html">http://www.matthewbussa.com/2011/01/evolution-of-automated-testing.html</a></p>
+</div>
+<div class="section" id="building-a-solid-foundation">
+<h1>Building a Solid Foundation<a class="headerlink" href="#building-a-solid-foundation" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="_images/triangle.png"><img alt="_images/triangle.png" class="align-center" src="_images/triangle.png" style="width: 600px;" /></a>
+</div>
+<div class="section" id="the-roots-of-bdd-test-driven-development">
+<h1>The Roots of BDD: Test-Driven Development<a class="headerlink" href="#the-roots-of-bdd-test-driven-development" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Cycle:<ul>
+<li>Add a test</li>
+<li>Run tests and see the new one fail</li>
+<li>Write some code</li>
+<li>Run the automated tests and see them succeed</li>
+<li>Refactor code</li>
+<li>Repeat</li>
+</ul>
+</li>
+<li>Purpose<ul>
+<li>Encourage simple designs</li>
+<li>Facilitate short release cycles</li>
+<li>Provide higher confidence in releases</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="behavior-driven-development">
+<h1>Behavior-Driven Development<a class="headerlink" href="#behavior-driven-development" title="Permalink to this headline">¶</a></h1>
+<p>Behavior-driven development emerged from test-driven development, to answer these questions:</p>
+<ul class="build bullet simple">
+<li>Where do I start?</li>
+<li>What do I test?</li>
+<li>How much do I test in one go?</li>
+<li>What do I call the tests?</li>
+<li>How can I understand why a test fails?</li>
+</ul>
+</div>
+<div class="section" id="fundamental-principles-of-story-bdd">
+<h1>Fundamental Principles of Story BDD<a class="headerlink" href="#fundamental-principles-of-story-bdd" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ignorance">
+<h2>Ignorance<a class="headerlink" href="#ignorance" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div><p>Ignorance is the biggest constraint in software development</p>
+<p class="attribution">&mdash;Dan North</p>
+</div></blockquote>
+</div>
+<div class="section" id="value">
+<h2>Value<a class="headerlink" href="#value" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div>Every feature should have a measurable business value</div></blockquote>
+</div>
+<div class="section" id="communication">
+<h2>Communication<a class="headerlink" href="#communication" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div>Everyone on the team should have a common language to describe the site</div></blockquote>
+</div>
+<div class="section" id="conversation">
+<h2>Conversation<a class="headerlink" href="#conversation" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div><blockquote>
+<div><div class="line-block">
+<div class="line">Having conversations</div>
+<div class="line">is more important than</div>
+<div class="line">Capturing conversations</div>
+<div class="line">is more important than</div>
+<div class="line">Automating conversations</div>
+</div>
+</div></blockquote>
+<p class="attribution">&mdash;Liz Keough</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="gherkin-feature-stanzas">
+<h1>Gherkin Feature Stanzas<a class="headerlink" href="#gherkin-feature-stanzas" title="Permalink to this headline">¶</a></h1>
+<ul class="bullet simple">
+<li>There can only be one feature per file</li>
+<li>Every feature starts with:<ul>
+<li>Feature: {Title}</li>
+</ul>
+</li>
+<li>Followed by narrative:<ul>
+<li>In order to {achieve a benefit}</li>
+<li>As a {role or user}</li>
+<li>I need to {do something}</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The feature stanza is never executed, but it <em>is</em> parsed. The &#8220;Feature:&#8221; label MUST be present at the top of each feature file.</p>
+</div>
+</div>
+<div class="section" id="gherkin-scenario-format">
+<h1>Gherkin Scenario Format<a class="headerlink" href="#gherkin-scenario-format" title="Permalink to this headline">¶</a></h1>
+<p><strong>Given</strong>:  Defines the initial state of the system for the scenario</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Given </span><span class="nf">I am on the homepage</span>
+</pre></div>
+</div>
+<p><strong>When</strong>: Describes the action performed on the system</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">When </span><span class="nf">I press &quot;</span><span class="s">Log in</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+<p><strong>Then</strong>: Describes the system state after the action has been performed</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Then </span><span class="nf">I should see &quot;</span><span class="s">Username field is required</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+<p><strong>And</strong>, <strong>But</strong>: Can be added to any of the above</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">And </span><span class="nf">I should see &quot;</span><span class="s">Password field is required</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+<ul class="bullet build simple">
+<li>Each line is called a Step</li>
+<li>Each step is supported by PHP code</li>
+</ul>
+</div>
+<div class="section" id="the-whole-feature">
+<h1>The whole feature<a class="headerlink" href="#the-whole-feature" title="Permalink to this headline">¶</a></h1>
+<p><tt class="docutils literal"><span class="pre">features/login.feature</span></tt></p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Feature:</span><span class="nf"> Maintain content</span>
+<span class="nf">  In order to maintain site content</span>
+<span class="nf">  As an editor</span>
+<span class="nf">  I need to log in</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Enter valid username and password // Happy path</span>
+<span class="k">    Given </span><span class="nf">I am on the homepage</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I fill in &quot;</span><span class="s">admin</span><span class="nf">&quot; for &quot;</span><span class="s">Username</span><span class="nf">&quot;</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">I fill in &quot;</span><span class="s">admin</span><span class="nf">&quot; for &quot;</span><span class="s">Password</span><span class="nf">&quot;</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">I press &quot;</span><span class="s">Log in</span><span class="nf">&quot;</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">I should see &quot;</span><span class="s">Add content</span><span class="nf">&quot;</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Fail to enter username or password // Less happy path</span>
+<span class="k">    Given </span><span class="nf">I am on the homepage</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I press &quot;</span><span class="s">Log in</span><span class="nf">&quot;</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">I should see &quot;</span><span class="s">Username field is required</span><span class="nf">&quot;</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">I should see &quot;</span><span class="s">Password field is required</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scenario-style">
+<h1>Scenario Style<a class="headerlink" href="#scenario-style" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>Every scenario is indendent</li>
+<li>Always from perspecitve of the role identified in the feature</li>
+<li>No more than 6 - 8 scenarios per feature</li>
+<li>One Given: Set the scene</li>
+<li>One When: Change the scene</li>
+<li>One Then: Observe the outcome</li>
+<li>Each with as many Ands or Buts as needed</li>
+</ul>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Once a step definition is written in PHP, the step can be re-used:</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Scenario:</span><span class="nf"> Access free content</span>
+<span class="k">  Given </span><span class="nf">I am on &quot;</span><span class="s">/series/learning-sass-and-compass</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">I follow &quot;</span><span class="s">What is a CSS Preprocessor?</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">I should see &quot;</span><span class="s">What is a CSS Preprocessor?</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">I should see &quot;</span><span class="s">Interactive Transcripts</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/dm-teasers.png"><img alt="_images/dm-teasers.png" class="align-center" src="_images/dm-teasers.png" style="width: 675px;" /></a>
+</div>
+</div>
+<div class="section" id="elaborate-with-scenarios">
+<h1>Elaborate with Scenarios<a class="headerlink" href="#elaborate-with-scenarios" title="Permalink to this headline">¶</a></h1>
+<p>Add scenarios to each feature in order to:</p>
+<ul class="build bullet simple">
+<li>Elicit additional expectations from product owners</li>
+<li>Uncover unknowns before work is accepted in a sprint</li>
+<li>Communicate to developers what needs to be implemented</li>
+<li>Demonstrate software meets acceptance criteria</li>
+<li>Provide a foundation for change orders</li>
+<li>Eventually, create automated tests</li>
+</ul>
+</div>
+<div class="section" id="when-to-elaborate">
+<h1>When to elaborate<a class="headerlink" href="#when-to-elaborate" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>Important scenarios sometimes written alongside features</li>
+<li>Most detail is usually added <strong>after</strong> a feature is chosen for implementation</li>
+<li>Too much detail may bog down understanding of full scope</li>
+<li>Why detail something that may never be built?</li>
+</ul>
+</div>
+<div class="section" id="what-to-describe">
+<h1>What to describe<a class="headerlink" href="#what-to-describe" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>Don&#8217;t try to test every permutation</li>
+<li>Cover valuable paths</li>
+<li>The happy paths: When the user does what you want them to</li>
+</ul>
+<ul class="build bullet simple">
+<li>The less happy paths: When you need to direct the user to do something else<ul>
+<li>A required field was left blank</li>
+<li>Data was entered in an unexpected format</li>
+<li>Terms of service weren&#8217;t accepted</li>
+<li>A search returns no results</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="who-elaborates">
+<h1>Who elaborates?<a class="headerlink" href="#who-elaborates" title="Permalink to this headline">¶</a></h1>
+<ul class="column-1 build simple">
+<li>Elaboration is a collaboration between:<ul>
+<li>Project managers</li>
+<li>Product owners</li>
+<li>Developers</li>
+<li>Testers</li>
+</ul>
+</li>
+</ul>
+<ul class="column-2 build simple">
+<li>Emphasize providing:<ul>
+<li>Enough guidance for developers</li>
+<li>Enough flexibility for implementation</li>
+<li>Keep it flexible</li>
+<li>Avoid implementation details</li>
+<li>Don&#8217;t try to stuff it into pre-existing steps</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h1>Gherkin Scenario Format<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><strong>Given</strong>:  Defines the initial state of the system for the scenario</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Given </span><span class="nf">I am on the homepage</span>
+</pre></div>
+</div>
+<p><strong>When</strong>: Describes the action performed on the system</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">When </span><span class="nf">I press &quot;</span><span class="s">Log in</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+<p><strong>Then</strong>: Describes the system state after the action has been performed</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Then </span><span class="nf">I should see &quot;</span><span class="s">Username field is required</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+<p><strong>And</strong>, <strong>But</strong>: Can be added to any of the above</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">And </span><span class="nf">I should see &quot;</span><span class="s">Password field is required</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+<ul class="bullet build simple">
+<li>Each line is called a Step</li>
+<li>Each step is supported by PHP code</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h1>The whole feature<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
+<p><tt class="docutils literal"><span class="pre">features/login.feature</span></tt></p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Feature:</span><span class="nf"> Maintain content</span>
+<span class="nf">  In order to maintain site content</span>
+<span class="nf">  As an editor</span>
+<span class="nf">  I need to log in</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Enter valid username and password // Happy path</span>
+<span class="k">    Given </span><span class="nf">I am on the homepage</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I fill in &quot;</span><span class="s">admin</span><span class="nf">&quot; for &quot;</span><span class="s">Username</span><span class="nf">&quot;</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">I fill in &quot;</span><span class="s">admin</span><span class="nf">&quot; for &quot;</span><span class="s">Password</span><span class="nf">&quot;</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">I press &quot;</span><span class="s">Log in</span><span class="nf">&quot;</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">I should see &quot;</span><span class="s">Add content</span><span class="nf">&quot;</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Fail to enter username or password // Less happy path</span>
+<span class="k">    Given </span><span class="nf">I am on the homepage</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I press &quot;</span><span class="s">Log in</span><span class="nf">&quot;</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">I should see &quot;</span><span class="s">Username field is required</span><span class="nf">&quot;</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">I should see &quot;</span><span class="s">Password field is required</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h1>Scenario Style<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>Every scenario is indendent</li>
+<li>Always from perspecitve of the role identified in the feature</li>
+<li>No more than 6 - 8 scenarios per feature</li>
+<li>One Given: Set the scene</li>
+<li>One When: Change the scene</li>
+<li>One Then: Observe the outcome</li>
+<li>Each with as many Ands or Buts as needed</li>
+</ul>
+<div class="section" id="id4">
+<h2>Example<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>Once a step definition is written in PHP, the step can be re-used:</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Scenario:</span><span class="nf"> Access free content</span>
+<span class="k">  Given </span><span class="nf">I am on &quot;</span><span class="s">/series/learning-sass-and-compass</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">I follow &quot;</span><span class="s">What is a CSS Preprocessor?</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">I should see &quot;</span><span class="s">What is a CSS Preprocessor?</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">I should see &quot;</span><span class="s">Interactive Transcripts</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/dm-teasers.png"><img alt="_images/dm-teasers.png" class="align-center" src="_images/dm-teasers.png" style="width: 675px;" /></a>
+</div>
+</div>
+<div class="section" id="the-drupal-extension">
+<h1>The Drupal Extension<a class="headerlink" href="#the-drupal-extension" title="Permalink to this headline">¶</a></h1>
+<ul class="column-1 simple">
+<li>Overrides default behaviors:<ul>
+<li>Snippets follow Drupal coding standards</li>
+<li>Mink Extension steps get synonyms for readability</li>
+</ul>
+</li>
+<li>Provides drivers to facilitate data setup<ul>
+<li>Blackbox</li>
+<li>Drush</li>
+<li>Drupal API</li>
+</ul>
+</li>
+</ul>
+<ul class="column-2 simple">
+<li>Adds support for Drupal:<ul>
+<li>Regions</li>
+<li>Node types</li>
+<li>Users and Roles</li>
+<li>Taxonomy</li>
+<li>Subcontexts for Contributed Modules</li>
+</ul>
+</li>
+</ul>
+<img alt="_images/behatdrupal.jpg" class="align-center" src="_images/behatdrupal.jpg" />
+</div>
+<div class="section" id="provides-drivers-for-data-set-up">
+<h1>Provides drivers for data set up<a class="headerlink" href="#provides-drivers-for-data-set-up" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>Works with Drupal 6, 7, and 8</li>
+<li>Connect with no privileges (local or remote)</li>
+<li>Connect with Drush (local or remote)</li>
+<li>Connect with the Drupal API (local only)</li>
+</ul>
+</div>
+<div class="section" id="about-data-setup">
+<h1>About data setup<a class="headerlink" href="#about-data-setup" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>Every scenario must be able to run independent of other scenarios</li>
+<li>Often work with a fresh copy of the production database</li>
+<li>Can&#8217;t always assume the database has specific content</li>
+<li>Separate architectural elements from content elements</li>
+<li>Insert data to get reliable checks</li>
+</ul>
+<div class="section" id="drush-alias-file">
+<h2>Drush: alias file<a class="headerlink" href="#drush-alias-file" title="Permalink to this headline">¶</a></h2>
+<p># ~melissa/.drush/myaliases.drushrc.php</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$aliases</span><span class="p">[</span><span class="s1">&#39;seven&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+  <span class="s1">&#39;root&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/var/www/seven/drupal&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;uri&#39;</span> <span class="o">=&gt;</span>  <span class="s1">&#39;seven.l&#39;</span><span class="p">,</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="drush-behat-yml">
+<h2>Drush: behat.yml<a class="headerlink" href="#drush-behat-yml" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-yaml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="l-Scalar-Plain">default</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">paths</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">features</span><span class="p-Indicator">:</span> <span class="s">&#39;features&#39;</span>
+  <span class="l-Scalar-Plain">extensions</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">Behat\MinkExtension\Extension</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">goutte</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">~</span>
+      <span class="l-Scalar-Plain">selenium2</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">~</span>
+      <span class="l-Scalar-Plain">base_url</span><span class="p-Indicator">:</span> <span class="s">&#39;http://drupal.l&#39;</span>
+    <span class="l-Scalar-Plain">Drupal\DrupalExtension\Extension</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">blackbox</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">~</span>
+<span class="hll">      <span class="l-Scalar-Plain">drush</span><span class="p-Indicator">:</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">alias</span><span class="p-Indicator">:</span> <span class="s">&#39;seven&#39;</span>
+</span></pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="drupal-api-behat-yml">
+<h2>Drupal API: behat.yml<a class="headerlink" href="#drupal-api-behat-yml" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-yaml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span class="l-Scalar-Plain">default</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">paths</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">features</span><span class="p-Indicator">:</span> <span class="s">&#39;features&#39;</span>
+  <span class="l-Scalar-Plain">extensions</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">Behat\MinkExtension\Extension</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">goutte</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">~</span>
+      <span class="l-Scalar-Plain">selenium2</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">~</span>
+      <span class="l-Scalar-Plain">base_url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://drupal.l</span>
+      <span class="l-Scalar-Plain">show_cmd</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">firefox %s</span>
+    <span class="l-Scalar-Plain">Drupal\DrupalExtension\Extension</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">blackbox</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">~</span>
+      <span class="l-Scalar-Plain">api_driver</span><span class="p-Indicator">:</span> <span class="s">&quot;drupal&quot;</span>
+<span class="hll">      <span class="l-Scalar-Plain">drupal</span><span class="p-Indicator">:</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">drupal_root</span><span class="p-Indicator">:</span> <span class="s">&quot;/var/www/seven/drupal&quot;</span>
+</span></pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="regions">
+<h2>Regions<a class="headerlink" href="#regions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Requires a map in the behat.yml file</li>
+</ul>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Given </span><span class="nf">I press &quot;</span><span class="s">Search</span><span class="nf">&quot; in the &quot;</span><span class="s">Header</span><span class="nf">&quot; region</span>
+<span class="k">Given </span><span class="nf">I fill in &quot;</span><span class="s">Foo</span><span class="nf">&quot; for &quot;</span><span class="s">Search</span><span class="nf">&quot; in the &quot;</span><span class="s">Header</span><span class="nf">&quot;</span>
+<span class="k">Given </span><span class="nf">I fill in &quot;</span><span class="s">Search</span><span class="nf">&quot; with &quot;</span><span class="s">Foo</span><span class="nf">&quot; in the &quot;</span><span class="s">Header</span><span class="nf">&quot;</span>
+<span class="k">When </span><span class="nf">I follow &quot;</span><span class="s">My link</span><span class="nf">&quot; in the &quot;</span><span class="s">right sidebar</span><span class="nf">&quot;</span>
+<span class="k">Then </span><span class="nf">I should see the error message containing &quot;</span><span class="s">An error message</span><span class="nf">&quot;</span>
+<span class="k">Then </span><span class="nf">I should see the following error &quot;</span><span class="s">An error message</span><span class="nf">&quot;</span>
+<span class="k">Then </span><span class="nf">I should see the error message containing &quot;</span><span class="s">a partial error message</span><span class="nf">&quot;</span>
+<span class="k">Then </span><span class="nf">I should not see the following error &quot;</span><span class="s">an error message</span><span class="nf">&quot;</span>
+<span class="k">Then </span><span class="nf">I should see the success message &quot;</span><span class="s">something happened!</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>Regions<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>Structure &gt; Blocks &gt; (Theme) &gt; Demonstrate block regions</p>
+<a class="reference internal image-reference" href="_images/drupal-regions-bartik.png"><img alt="_images/drupal-regions-bartik.png" src="_images/drupal-regions-bartik.png" style="height: 400px;" /></a>
+</div>
+<div class="section" id="region-map-behat-yml">
+<h2>Region map: behat.yml<a class="headerlink" href="#region-map-behat-yml" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-yaml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span class="l-Scalar-Plain">default</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">paths</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">features</span><span class="p-Indicator">:</span> <span class="s">&#39;features&#39;</span>
+  <span class="l-Scalar-Plain">extensions</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">Behat\MinkExtension\Extension</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">goutte</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">~</span>
+      <span class="l-Scalar-Plain">selenium2</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">~</span>
+      <span class="l-Scalar-Plain">base_url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://drupal.l</span>
+    <span class="l-Scalar-Plain">Drupal\DrupalExtension\Extension</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">blackbox</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">~</span>
+<span class="hll">      <span class="l-Scalar-Plain">region_map</span><span class="p-Indicator">:</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">Header</span><span class="p-Indicator">:</span> <span class="s">&#39;.region-header&#39;</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">Featured</span><span class="p-Indicator">:</span> <span class="s">&#39;.region-featured&#39;</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">Sidebar first</span><span class="p-Indicator">:</span> <span class="s">&#39;.region-sidebar-first&#39;</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">Left sidebar</span><span class="p-Indicator">:</span> <span class="s">&#39;.region-sidebar-first&#39;</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">Sidebar second</span><span class="p-Indicator">:</span> <span class="s">&#39;.region-sidebar-second&#39;</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">Highlighted</span><span class="p-Indicator">:</span> <span class="s">&#39;.region-highlighted&#39;</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">Help</span><span class="p-Indicator">:</span> <span class="s">&#39;.region-content&#39;</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">Content</span><span class="p-Indicator">:</span> <span class="s">&#39;.region-content&#39;</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">Tryptych first</span><span class="p-Indicator">:</span> <span class="s">&#39;.region-triptych-first&#39;</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">Triptych middle</span><span class="p-Indicator">:</span> <span class="s">&#39;.region-triptych-first&#39;</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">Triptych last</span><span class="p-Indicator">:</span> <span class="s">&#39;.region-triptych-first&#39;</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">Footer first column</span><span class="p-Indicator">:</span> <span class="s">&#39;.region-footer-firstcolumn&#39;</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">Footer second column</span><span class="p-Indicator">:</span> <span class="s">&#39;.region-footer-secondcolumn&#39;</span>
+</span><span class="hll">        <span class="l-Scalar-Plain">Footer third column</span><span class="p-Indicator">:</span>  <span class="s">&#39;.region-footer-thirdcolumn&#39;</span>
+</span>        <span class="l-Scalar-Plain">Footer fourth column</span><span class="p-Indicator">:</span> <span class="s">&#39;.region-footer-fourthcolumn&#39;</span>
+        <span class="l-Scalar-Plain">Footer</span><span class="p-Indicator">:</span> <span class="s">&#39;.region-footer&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id6">
+<h2>Regions<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">label</span></tt> =&gt; <tt class="docutils literal"><span class="pre">css</span> <span class="pre">selector</span></tt></li>
+<li>This means regions don&#8217;t have to map directly to <em>Drupal theme</em> regions</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="nodes">
+<h2>Nodes<a class="headerlink" href="#nodes" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Given </span><span class="nf">I am viewing an &quot;</span><span class="s">article</span><span class="nf">&quot; node with the title &quot;</span><span class="s">My title</span><span class="nf">&quot;</span>
+<span class="k">Given </span><span class="nf">a &quot;</span><span class="s">page</span><span class="nf">&quot; node with the title &quot;</span><span class="s">About</span><span class="nf">&quot;</span>
+<span class="k">Given </span><span class="nf">I am viewing my &quot;</span><span class="s">Article</span><span class="nf">&quot; node with the title &quot;</span><span class="s">My latest blog</span><span class="nf">&quot;</span>
+<span class="k">Given </span><span class="nf">&quot;</span><span class="s">Page</span><span class="nf">&quot; nodes:</span>
+<span class="nf">| title</span><span class="k">      |</span><span class="s"> body</span><span class="k">                    |</span><span class="nf"></span>
+<span class="nf">| About</span><span class="k">      |</span><span class="s"> An about page</span><span class="k">           |</span><span class="nf"></span>
+<span class="nf">| Contact Us</span><span class="k"> |</span><span class="s"> Our contact information</span><span class="k"> |</span><span class="nf"></span>
+<span class="k">Given </span><span class="nf">I am viewing an &quot;</span><span class="s">article</span><span class="nf">&quot; node:</span>
+<span class="nf">| title</span><span class="k">       |</span><span class="s"> My title</span><span class="k">             |</span><span class="nf"></span>
+<span class="nf">| body</span><span class="k">        |</span><span class="s"> Some article content</span><span class="k"> |</span><span class="nf"></span>
+<span class="nf">| author</span><span class="k">      |</span><span class="s"> Joe Author</span><span class="k">           |</span><span class="nf"></span>
+<span class="nf">| field_image</span><span class="k"> |</span><span class="s"> image.png</span><span class="k">            |</span><span class="nf"></span>
+<span class="k">Then </span><span class="nf">I should be able to edit an &quot;</span><span class="s">article</span><span class="nf">&quot; node</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="users-roles">
+<h2>Users &amp; Roles<a class="headerlink" href="#users-roles" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Given </span><span class="nf">I am an anonymous user</span>
+<span class="k">Given </span><span class="nf">I am not logged in</span>
+<span class="k">Given </span><span class="nf">I am logged in as a user with the &quot;</span><span class="s">administrator</span><span class="nf">&quot; role</span>
+<span class="k">Given </span><span class="nf">users:</span>
+<span class="nf">| name</span><span class="k">  |</span><span class="s"> mail</span><span class="k">              |</span><span class="nf"></span>
+<span class="nf">| Joe</span><span class="k">   |</span><span class="s"> joe@example.com</span><span class="k">   |</span><span class="nf"></span>
+<span class="nf">| Sally</span><span class="k"> |</span><span class="s"> sally@example.com</span><span class="k"> |</span><span class="nf"></span>
+<span class="k">Given </span><span class="nf">I am logged in as &quot;</span><span class="s">Joe</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="taxonomy">
+<h2>Taxonomy<a class="headerlink" href="#taxonomy" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Given </span><span class="nf">I am viewing a &quot;</span><span class="s">tags</span><span class="nf">&quot; term with the name &quot;</span><span class="s">Category 1</span><span class="nf">&quot;</span>
+<span class="k">Given </span><span class="nf">a &quot;</span><span class="s">tags</span><span class="nf">&quot; term with the name &quot;</span><span class="s">Category 2</span><span class="nf">&quot;</span>
+<span class="k">Given </span><span class="nf">&quot;</span><span class="s">tags</span><span class="nf">&quot; term:</span>
+<span class="nf">| name</span><span class="k">       |</span>
+<span class="k">|</span><span class="s"> Category 3</span><span class="k"> |</span><span class="nf"></span>
+<span class="nf">| Category </span><span class="s">4</span><span class="k"> |</span><span class="s"></span>
+<span class="s">Given I click &quot;manage fields&quot; in the &quot;Article&quot; row </span><span class="c"># Not specific to taxonomy</span><span class="s"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="and-more">
+<h1>And more<a class="headerlink" href="#and-more" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">* </span><span class="nf">@Given /^I should not see the error message(?:| containing) &quot;</span><span class="s">([^</span><span class="nf">&quot;]*)&quot;</span><span class="s">$/</span>
+<span class="s">* @Given /^I should not see the success message(?:| containing) </span><span class="nf">&quot;([^&quot;</span><span class="s">]*)</span><span class="nf">&quot;$/</span>
+<span class="k">* </span><span class="nf">@Given /^the cache has been cleared$/</span>
+<span class="k">* </span><span class="nf">@Given /^I run cron$/</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="and-yet-more">
+<h1>And yet more:<a class="headerlink" href="#and-yet-more" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">* </span><span class="nf">@Then /^I should see the link &quot;</span><span class="s">(?P</span><span class="nv">&lt;link&gt;</span><span class="s">[^</span><span class="nf">&quot;]*)&quot;</span><span class="s">$/</span>
+<span class="s">* @Then /^I should not see the link </span><span class="nf">&quot;(?P</span><span class="nv">&lt;link&gt;</span><span class="nf">[^&quot;</span><span class="s">]*)</span><span class="nf">&quot;$/</span>
+<span class="k">* </span><span class="nf">@Then /^I (?:\\|should )see the heading &quot;</span><span class="s">(?P</span><span class="nv">&lt;heading&gt;</span><span class="s">[^</span><span class="nf">&quot;]*)&quot;</span><span class="s">$/</span>
+<span class="s">* @Then /^(?:I|I should) see the text </span><span class="nf">&quot;(?P</span><span class="nv">&lt;text&gt;</span><span class="nf">[^&quot;</span><span class="s">]*)</span><span class="nf">&quot;$/</span>
+<span class="k">* </span><span class="nf">@Then /^I should not see the text &quot;</span><span class="s">(?P</span><span class="nv">&lt;text&gt;</span><span class="s">[^</span><span class="nf">&quot;]*)&quot;</span><span class="s">$/</span>
+<span class="s">* @When /^I visit </span><span class="nf">&quot;(?P</span><span class="nv">&lt;path&gt;</span><span class="nf">[^&quot;</span><span class="s">]*)</span><span class="nf">&quot;$/</span>
+<span class="k">* </span><span class="nf">@When /^I click &quot;</span><span class="s">(?P</span><span class="nv">&lt;link&gt;</span><span class="s">[^</span><span class="nf">&quot;]*)&quot;</span><span class="s">$/</span>
+<span class="s">* @When /^I press the </span><span class="nf">&quot;(?P</span><span class="nv">&lt;button&gt;</span><span class="nf">[^&quot;</span><span class="s">]*)</span><span class="nf">&quot; button$/</span>
+</pre></div>
+</div>
+<p>Note: The source for these is located at vendor/drupal/drupal-extension/src/Drupal/DrupalExtension/Context/DrupalContext.php</p>
+</div>
+<div class="section" id="loads-module-specific-step-definitions">
+<h1>Loads module-specific step definitions<a class="headerlink" href="#loads-module-specific-step-definitions" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullet simple">
+<li>Define one or more directories that contain step definitions in the <tt class="docutils literal"><span class="pre">behat.yml</span></tt></li>
+<li>The Drupal Extension recursively searches for *.behat.inc</li>
+<li>Not yet widely adopted</li>
+</ul>
+<div class="section" id="subcontexts-behat-yml">
+<h2>Subcontexts: behat.yml<a class="headerlink" href="#subcontexts-behat-yml" title="Permalink to this headline">¶</a></h2>
+<p>Load subcontexts from outside Drupal root. Be sure to change the path for your system</p>
+<div class="highlight-yaml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="l-Scalar-Plain">default</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">paths</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">features</span><span class="p-Indicator">:</span> <span class="s">&#39;features&#39;</span>
+  <span class="l-Scalar-Plain">extensions</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">Behat\MinkExtension\Extension</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">goutte</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">~</span>
+      <span class="l-Scalar-Plain">selenium2</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">~</span>
+      <span class="l-Scalar-Plain">base_url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://drupal.l</span>
+    <span class="l-Scalar-Plain">Drupal\DrupalExtension\Extension</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">blackbox</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">~</span>
+      <span class="l-Scalar-Plain">subcontexts</span><span class="p-Indicator">:</span>
+<span class="hll">        <span class="l-Scalar-Plain">paths</span><span class="p-Indicator">:</span>
+</span>          <span class="p-Indicator">-</span> <span class="s">&quot;/path/to/subcontexts/outside/of/drupal/&quot;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="configurable-strings">
+<h1>Configurable strings<a class="headerlink" href="#configurable-strings" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-yaml"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre> <span class="l-Scalar-Plain">Drupal\DrupalExtension\Extension</span><span class="p-Indicator">:</span>
+   <span class="l-Scalar-Plain">text</span><span class="p-Indicator">:</span>
+<span class="hll">         <span class="l-Scalar-Plain">log_out</span><span class="p-Indicator">:</span> <span class="s">&quot;Sign</span><span class="nv"> </span><span class="s">out&quot;</span>
+</span><span class="hll">         <span class="l-Scalar-Plain">log_in</span><span class="p-Indicator">:</span> <span class="s">&quot;Sign</span><span class="nv"> </span><span class="s">in&quot;</span>
+</span><span class="hll">         <span class="l-Scalar-Plain">password_field</span><span class="p-Indicator">:</span> <span class="s">&quot;Enter</span><span class="nv"> </span><span class="s">your</span><span class="nv"> </span><span class="s">password&quot;</span>
+</span><span class="hll">         <span class="l-Scalar-Plain">username_field</span><span class="p-Indicator">:</span> <span class="s">&quot;Nickname&quot;</span>
+</span></pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="alter-nodes-users-terms-prior-to-saving">
+<h1>Alter nodes, users, terms prior to saving<a class="headerlink" href="#alter-nodes-users-terms-prior-to-saving" title="Permalink to this headline">¶</a></h1>
+<p>Normally, to create a node.</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Given </span><span class="nf">&quot;</span><span class="s">article</span><span class="nf">&quot; nodes:</span>
+<span class="nf">| title</span><span class="k">        |</span><span class="s"> body</span><span class="k">             |</span><span class="s"> created</span><span class="k">            |</span><span class="s"> status</span><span class="k"> |</span><span class="s"> promote</span><span class="k"> |</span><span class="nf"></span>
+<span class="nf">| Test article</span><span class="k"> |</span><span class="s"> PLACEHOLDER BODY</span><span class="k"> |</span><span class="s"> 07/27/2014 12:03am</span><span class="k"> |</span><span class="s">      1</span><span class="k"> |</span><span class="s">       1</span><span class="k"> |</span>
+</pre></div>
+</div>
+<p>Note, <strong>created</strong>.</p>
+</div>
+<div class="section" id="id7">
+<h1>Alter nodes, users, terms prior to saving<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Given </span><span class="nf">&quot;</span><span class="s">article</span><span class="nf">&quot; nodes:</span>
+<span class="nf">| title</span><span class="k">        |</span><span class="s"> body</span><span class="k">        |</span><span class="s"> published on</span><span class="k">       |</span><span class="s"> status</span><span class="k"> |</span><span class="s"> promote</span><span class="k"> |</span><span class="nf"></span>
+<span class="nf">| Test article</span><span class="k"> |</span><span class="s"> PLACEHOLDER</span><span class="k"> |</span><span class="s"> 04/27/2013 11:11am</span><span class="k"> |</span><span class="s">      1</span><span class="k"> |</span><span class="s">       1</span><span class="k"> |</span>
+</pre></div>
+</div>
+<p>Note, <strong>published on</strong>.</p>
+</div>
+<div class="section" id="id8">
+<h1>Alter nodes, users, terms prior to saving<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="sd">/**</span>
+<span class="sd"> * Hook into node creation to test `@beforeNodeCreate`</span>
+<span class="sd"> *</span>
+<span class="sd"> * @beforeNodeCreate</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">alterNodeParameters</span><span class="p">(</span><span class="nx">EntityEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Change &#39;published on&#39; to the expected &#39;created&#39;.</span>
+  <span class="nv">$node</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getEntity</span><span class="p">();</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$node</span><span class="o">-&gt;</span><span class="p">{</span><span class="s2">&quot;published on&quot;</span><span class="p">}))</span> <span class="p">{</span>
+    <span class="nv">$node</span><span class="o">-&gt;</span><span class="na">created</span> <span class="o">=</span> <span class="nv">$node</span><span class="o">-&gt;</span><span class="p">{</span><span class="s2">&quot;published on&quot;</span><span class="p">};</span>
+    <span class="nb">unset</span><span class="p">(</span><span class="nv">$node</span><span class="o">-&gt;</span><span class="p">{</span><span class="s2">&quot;published on&quot;</span><span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Also available:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">&#64;beforeTermCreate</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&#64;beforeUserCreate</span></tt></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="relational-data">
+<h1>Relational data<a class="headerlink" href="#relational-data" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Given </span><span class="nf">&quot;</span><span class="s">tags</span><span class="nf">&quot; terms:</span>
+<span class="nf">| name</span><span class="k">      |</span>
+<span class="k">|</span><span class="s"> Tag one</span><span class="k">   |</span><span class="nf"></span>
+<span class="nf">| Tag two</span><span class="k">   |</span>
+<span class="k">|</span><span class="s"> Tag three</span><span class="k"> |</span><span class="nf"></span>
+<span class="nf">| Tag four</span><span class="k">  |</span><span class="s"></span>
+<span class="s">And users:</span><span class="k"></span>
+<span class="k">|</span><span class="s"> name</span><span class="k"> |</span><span class="nf"></span>
+<span class="nf">| Joe</span><span class="k">  |</span>
+<span class="k">|</span><span class="s"> Mike</span><span class="k"> |</span><span class="nf"></span>
+<span class="k">And </span><span class="nf">&quot;</span><span class="s">article</span><span class="nf">&quot; nodes:</span>
+<span class="nf">| title</span><span class="k">              |</span><span class="s"> field_tags</span><span class="k">                  |</span><span class="s"> author</span><span class="k"> |</span><span class="nf"></span>
+<span class="nf">| An article by Joe</span><span class="k">  |</span><span class="s"> Tag one, Tag two, Tag three</span><span class="k"> |</span><span class="s"> Joe</span><span class="k">    |</span><span class="nf"></span>
+<span class="nf">| An article by Mike</span><span class="k"> |</span><span class="s"> Tag four</span><span class="k">                    |</span><span class="s"> Mike</span><span class="k">   |</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="drupal-9">
+<h1>Drupal 9<a class="headerlink" href="#drupal-9" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullets simple">
+<li>Replace behavioral/functional SimpleTests with Behat</li>
+<li>Replace others with PHPUnit</li>
+</ul>
+<div class="section" id="testing-the-node-form-buttons-simpletest">
+<h2>Testing the node form buttons (SimpleTest)<a class="headerlink" href="#testing-the-node-form-buttons-simpletest" title="Permalink to this headline">¶</a></h2>
+<p>This code goes on for 89 lines, to test the <em>node form buttons</em>.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="sd">/**</span>
+<span class="sd"> * Tests that the right buttons are displayed for saving nodes.</span>
+<span class="sd"> */</span>
+<span class="k">function</span> <span class="nf">testNodeFormButtons</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="c1">// Login as administrative user.</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">drupalLogin</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">admin_user</span><span class="p">);</span>
+
+  <span class="c1">// Verify the buttons on a node add form.</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">drupalGet</span><span class="p">(</span><span class="s1">&#39;node/add/article&#39;</span><span class="p">);</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertButtons</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="nx">t</span><span class="p">(</span><span class="s1">&#39;Save and publish&#39;</span><span class="p">),</span> <span class="nx">t</span><span class="p">(</span><span class="s1">&#39;Save as unpublished&#39;</span><span class="p">)));</span>
+
+  <span class="c1">// Save the node and assert it&#39;s published after clicking</span>
+  <span class="c1">// &#39;Save and publish&#39;.</span>
+  <span class="nv">$edit</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">randomString</span><span class="p">());</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">drupalPostForm</span><span class="p">(</span><span class="s1">&#39;node/add/article&#39;</span><span class="p">,</span> <span class="nv">$edit</span><span class="p">,</span> <span class="nx">t</span><span class="p">(</span><span class="s1">&#39;Save and publish&#39;</span><span class="p">));</span>
+
+  <span class="c1">// Get the node.</span>
+  <span class="nv">$node_1</span> <span class="o">=</span> <span class="nx">node_load</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="nv">$node_1</span><span class="o">-&gt;</span><span class="na">isPublished</span><span class="p">(),</span> <span class="s1">&#39;Node is published&#39;</span><span class="p">);</span>
+
+  <span class="c1">// Verify the buttons on a node edit form.</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">drupalGet</span><span class="p">(</span><span class="s1">&#39;node/&#39;</span> <span class="o">.</span> <span class="nv">$node_1</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;/edit&#39;</span><span class="p">);</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertButtons</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="nx">t</span><span class="p">(</span><span class="s1">&#39;Save and keep published&#39;</span><span class="p">),</span> <span class="nx">t</span><span class="p">(</span><span class="s1">&#39;Save and unpublish&#39;</span><span class="p">)));</span>
+
+  <span class="c1">// Save the node and verify it&#39;s still published after clicking</span>
+  <span class="c1">// &#39;Save and keep published&#39;.</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">drupalPostForm</span><span class="p">(</span><span class="k">NULL</span><span class="p">,</span> <span class="nv">$edit</span><span class="p">,</span> <span class="nx">t</span><span class="p">(</span><span class="s1">&#39;Save and keep published&#39;</span><span class="p">));</span>
+  <span class="nv">$node</span> <span class="o">=</span> <span class="nx">node_load</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">);</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="nv">$node_1</span><span class="o">-&gt;</span><span class="na">isPublished</span><span class="p">(),</span> <span class="s1">&#39;Node is published&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing-the-node-form-buttons-behat">
+<h2>Testing the node form buttons (Behat)<a class="headerlink" href="#testing-the-node-form-buttons-behat" title="Permalink to this headline">¶</a></h2>
+<p>A start at replacing the previous (not complete, but close).</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Given </span><span class="nf">I am logged in as a user with the &quot;</span><span class="s">administer nodes, bypass node access</span><span class="nf">&quot; permissions</span>
+<span class="k">When </span><span class="nf">I visit &quot;</span><span class="s">node/add/article</span><span class="nf">&quot;</span>
+<span class="k">And </span><span class="nf">fill in &quot;</span><span class="s">Title</span><span class="nf">&quot; with &quot;</span><span class="s">A sample node title</span><span class="nf">&quot;</span>
+<span class="k">And </span><span class="nf">press &quot;</span><span class="s">Save and publish</span><span class="nf">&quot;</span>
+<span class="k">Then </span><span class="nf">I should see the heading &quot;</span><span class="s">A sample node title</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="questions">
+<h1>Questions?<a class="headerlink" href="#questions" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><ul class="simple">
+<li>Slides <a class="reference external" href="http://jhedstrom.github.io/presentations/2013-pnwds-behat">http://jhedstrom.github.io/presentations/2013-pnwds-behat</a></li>
+<li>Drupal Extension <a class="reference external" href="http://drupal.org/project/drupalextension">http://drupal.org/project/drupalextension</a></li>
+<li>Drupal Extension Documentation <a class="reference external" href="http://dspeak.com/drupalextension/">http://dspeak.com/drupalextension/</a></li>
+<li>Behat Documentation <a class="reference external" href="http://docs.behat.org/">http://docs.behat.org/</a></li>
+<li>Mink Extension Documentation <a class="reference external" href="http://extensions.behat.org/mink/">http://extensions.behat.org/mink/</a></li>
+</ul>
+</div></blockquote>
+<img alt="_images/behatdrupal.jpg" class="align-center" src="_images/behatdrupal.jpg" />
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Quality Assurance using Behat and the Drupal Extension</a></li>
+<li><a class="reference internal" href="#because-drupal-has">Because Drupal has:</a></li>
+<li><a class="reference internal" href="#we-need-to">We need to:</a></li>
+<li><a class="reference internal" href="#because-our-applications-are">Because our applications are:</a></li>
+<li><a class="reference internal" href="#we-need-to-be-able-to">We need to be able to:</a></li>
+<li><a class="reference internal" href="#describe">Describe</a></li>
+<li><a class="reference internal" href="#automate">Automate</a></li>
+<li><a class="reference internal" href="#from-a-bdd-perspective">From a BDD Perspective</a></li>
+<li><a class="reference internal" href="#types-of-testing">Types of Testing</a></li>
+<li><a class="reference internal" href="#at-the-core">At the Core</a></li>
+<li><a class="reference internal" href="#dealing-with-technical-debt">Dealing with Technical Debt</a></li>
+<li><a class="reference internal" href="#building-a-solid-foundation">Building a Solid Foundation</a></li>
+<li><a class="reference internal" href="#the-roots-of-bdd-test-driven-development">The Roots of BDD: Test-Driven Development</a></li>
+<li><a class="reference internal" href="#behavior-driven-development">Behavior-Driven Development</a></li>
+<li><a class="reference internal" href="#fundamental-principles-of-story-bdd">Fundamental Principles of Story BDD</a><ul>
+<li><a class="reference internal" href="#ignorance">Ignorance</a></li>
+<li><a class="reference internal" href="#value">Value</a></li>
+<li><a class="reference internal" href="#communication">Communication</a></li>
+<li><a class="reference internal" href="#conversation">Conversation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gherkin-feature-stanzas">Gherkin Feature Stanzas</a></li>
+<li><a class="reference internal" href="#gherkin-scenario-format">Gherkin Scenario Format</a></li>
+<li><a class="reference internal" href="#the-whole-feature">The whole feature</a></li>
+<li><a class="reference internal" href="#scenario-style">Scenario Style</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#elaborate-with-scenarios">Elaborate with Scenarios</a></li>
+<li><a class="reference internal" href="#when-to-elaborate">When to elaborate</a></li>
+<li><a class="reference internal" href="#what-to-describe">What to describe</a></li>
+<li><a class="reference internal" href="#who-elaborates">Who elaborates?</a></li>
+<li><a class="reference internal" href="#id1">Gherkin Scenario Format</a></li>
+<li><a class="reference internal" href="#id2">The whole feature</a></li>
+<li><a class="reference internal" href="#id3">Scenario Style</a><ul>
+<li><a class="reference internal" href="#id4">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-drupal-extension">The Drupal Extension</a></li>
+<li><a class="reference internal" href="#provides-drivers-for-data-set-up">Provides drivers for data set up</a></li>
+<li><a class="reference internal" href="#about-data-setup">About data setup</a><ul>
+<li><a class="reference internal" href="#drush-alias-file">Drush: alias file</a></li>
+<li><a class="reference internal" href="#drush-behat-yml">Drush: behat.yml</a></li>
+<li><a class="reference internal" href="#drupal-api-behat-yml">Drupal API: behat.yml</a></li>
+<li><a class="reference internal" href="#regions">Regions</a></li>
+<li><a class="reference internal" href="#id5">Regions</a></li>
+<li><a class="reference internal" href="#region-map-behat-yml">Region map: behat.yml</a></li>
+<li><a class="reference internal" href="#id6">Regions</a></li>
+<li><a class="reference internal" href="#nodes">Nodes</a></li>
+<li><a class="reference internal" href="#users-roles">Users &amp; Roles</a></li>
+<li><a class="reference internal" href="#taxonomy">Taxonomy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#and-more">And more</a></li>
+<li><a class="reference internal" href="#and-yet-more">And yet more:</a></li>
+<li><a class="reference internal" href="#loads-module-specific-step-definitions">Loads module-specific step definitions</a><ul>
+<li><a class="reference internal" href="#subcontexts-behat-yml">Subcontexts: behat.yml</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configurable-strings">Configurable strings</a></li>
+<li><a class="reference internal" href="#alter-nodes-users-terms-prior-to-saving">Alter nodes, users, terms prior to saving</a></li>
+<li><a class="reference internal" href="#id7">Alter nodes, users, terms prior to saving</a></li>
+<li><a class="reference internal" href="#id8">Alter nodes, users, terms prior to saving</a></li>
+<li><a class="reference internal" href="#relational-data">Relational data</a></li>
+<li><a class="reference internal" href="#drupal-9">Drupal 9</a><ul>
+<li><a class="reference internal" href="#testing-the-node-form-buttons-simpletest">Testing the node form buttons (SimpleTest)</a></li>
+<li><a class="reference internal" href="#testing-the-node-form-buttons-behat">Testing the node form buttons (Behat)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#questions">Questions?</a></li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/slideshow.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html">Quality Assurance using Behat and the Drupal Extension 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Melissa Anderson and Jonathan Hedstrom.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
+    </div>
+  </body>
+</html>

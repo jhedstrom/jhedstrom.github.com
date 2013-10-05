@@ -1,0 +1,155 @@
+.. slideconf::
+   :theme: process 
+
+Elaborate with Scenarios
+========================
+
+Add scenarios to each feature in order to:
+
+.. rst-class:: build bullet
+
+  * Elicit additional expectations from product owners
+  * Uncover unknowns before work is accepted in a sprint
+  * Communicate to developers what needs to be implemented
+  * Demonstrate software meets acceptance criteria
+  * Provide a foundation for change orders
+  * Eventually, create automated tests
+
+When to elaborate
+=================
+
+.. rst-class:: build bullet
+
+* Important scenarios sometimes written alongside features
+* Most detail is usually added **after** a feature is chosen for implementation 
+* Too much detail may bog down understanding of full scope
+* Why detail something that may never be built?
+
+What to describe
+================
+
+.. rst-class:: build bullet
+
+* Don't try to test every permutation
+
+* Cover valuable paths
+
+* The happy paths: When the user does what you want them to
+
+.. rst-class:: build bullet
+
+* The less happy paths: When you need to direct the user to do something else
+
+  * A required field was left blank
+  * Data was entered in an unexpected format
+  * Terms of service weren't accepted
+  * A search returns no results
+
+Who elaborates?
+===============
+
+.. rst-class:: column-1  build
+
+* Elaboration is a collaboration between:
+
+  * Project managers
+  * Product owners
+  * Developers
+  * Testers
+
+.. rst-class:: column-2 build
+
+* Emphasize providing: 
+
+  * Enough guidance for developers
+  * Enough flexibility for implementation
+  * Keep it flexible
+  * Avoid implementation details
+  * Don't try to stuff it into pre-existing steps
+
+Gherkin Scenario Format
+=======================
+
+**Given**:  Defines the initial state of the system for the scenario
+
+.. code-block:: gherkin
+
+  Given I am on the homepage
+
+**When**: Describes the action performed on the system
+
+.. code-block:: gherkin
+
+  When I press "Log in"
+
+**Then**: Describes the system state after the action has been performed
+
+.. code-block:: gherkin
+
+  Then I should see "Username field is required"
+
+**And**, **But**: Can be added to any of the above
+
+.. code-block:: gherkin
+
+  And I should see "Password field is required"
+
+.. rst-class:: bullet build
+
+* Each line is called a Step
+* Each step is supported by PHP code
+
+The whole feature
+=================
+
+``features/login.feature``
+
+.. code-block:: gherkin
+
+  Feature: Maintain content
+    In order to maintain site content
+    As an editor
+    I need to log in
+
+    Scenario: Enter valid username and password // Happy path
+      Given I am on the homepage
+      When I fill in "admin" for "Username"
+      And I fill in "admin" for "Password"
+      And I press "Log in"
+      Then I should see "Add content"
+
+    Scenario: Fail to enter username or password // Less happy path
+      Given I am on the homepage
+      When I press "Log in"
+      Then I should see "Username field is required"
+      And I should see "Password field is required"
+
+Scenario Style
+==============
+
+.. rst-class:: build bullet
+
+* Every scenario is indendent
+* Always from perspecitve of the role identified in the feature
+* No more than 6 - 8 scenarios per feature
+* One Given: Set the scene
+* One When: Change the scene
+* One Then: Observe the outcome
+* Each with as many Ands or Buts as needed
+
+Example
+-------
+
+Once a step definition is written in PHP, the step can be re-used: 
+
+.. code-block:: gherkin
+
+  Scenario: Access free content
+    Given I am on "/series/learning-sass-and-compass"
+    When I follow "What is a CSS Preprocessor?"
+    Then I should see "What is a CSS Preprocessor?"
+    And I should see "Interactive Transcripts"
+
+.. image:: _static/dm-teasers.png
+   :width: 675 px
+   :align: center

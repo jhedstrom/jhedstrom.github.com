@@ -1,0 +1,396 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Simplify &mdash; Quality Assurance using Behat and the Drupal Extension 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Quality Assurance using Behat and the Drupal Extension 1 documentation" href="index.html" />
+    <link rel="next" title="Selecting which Tests to Run" href="4-commandline.html" />
+    <link rel="prev" title="Elaborate" href="2-scenarios.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="4-commandline.html" title="Selecting which Tests to Run"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="2-scenarios.html" title="Elaborate"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Quality Assurance using Behat and the Drupal Extension 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="simplify">
+<h1>Simplify<a class="headerlink" href="#simplify" title="Permalink to this headline">¶</a></h1>
+<p>Gherkin provides some ways to improve readability:</p>
+<dl class="docutils">
+<dt>Backgrounds</dt>
+<dd>When scenarios share the same Given conditions</dd>
+<dt>Scenario Outline</dt>
+<dd>When several options need to be tried in the same format</dd>
+<dt>Tables</dt>
+<dd>When several repetitive checks need to be made on the same page</dd>
+</dl>
+</div>
+<div class="section" id="backgrounds-gherkin">
+<h1>Backgrounds: Gherkin<a class="headerlink" href="#backgrounds-gherkin" title="Permalink to this headline">¶</a></h1>
+<p>Several scenarios that all share the same setup can share a background.</p>
+<div class="column-1 build highlight-gherkin"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="nf">   </span><span class="k">Scenario:</span><span class="nf"> Access workbench</span>
+<span class="hll"><span class="k">     Given </span><span class="nf">I am logged in as &quot;</span><span class="s">editor</span><span class="nf">&quot;</span>
+</span><span class="hll"><span class="nf">     </span><span class="k">And </span><span class="nf">I am on the homepage</span>
+</span><span class="nf">     </span><span class="k">When </span><span class="nf">I click &quot;</span><span class="s">workbench</span><span class="nf">&quot;</span>
+<span class="nf">     </span><span class="k">Then </span><span class="nf">I should see &quot;</span><span class="s">My articles</span><span class="nf">&quot;</span>
+
+<span class="nf">   </span><span class="k">Scenario:</span><span class="nf"> Access admin list</span>
+<span class="hll"><span class="k">     Given </span><span class="nf">I am logged in as &quot;</span><span class="s">editor</span><span class="nf">&quot;</span>
+</span><span class="hll"><span class="nf">     </span><span class="k">And </span><span class="nf">I am on the homepage</span>
+</span><span class="nf">     </span><span class="k">When </span><span class="nf">I click &quot;</span><span class="s">Content</span><span class="nf">&quot;</span>
+<span class="nf">     </span><span class="k">Then </span><span class="nf">I should not see &quot;</span><span class="s">Access denied</span><span class="nf">&quot;</span>
+<span class="nf">     </span><span class="k">And </span><span class="nf">I should see &quot;</span><span class="s">Content</span><span class="nf">&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="column-2 build highlight-gherkin"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="nf">   </span><span class="k">Background:</span><span class="nf"></span>
+<span class="hll"><span class="k">     Given </span><span class="nf">I am logged in as &quot;</span><span class="s">editor</span><span class="nf">&quot;</span>
+</span><span class="hll"><span class="nf">     </span><span class="k">And </span><span class="nf">I am on the homepage</span>
+</span>
+<span class="nf">   </span><span class="k">Scenario:</span><span class="nf"> Access workbench</span>
+<span class="k">     When </span><span class="nf">I click &quot;</span><span class="s">Workbench</span><span class="nf">&quot;</span>
+<span class="nf">     </span><span class="k">Then </span><span class="nf">I should see &quot;</span><span class="s">My Articles</span><span class="nf">&quot;</span>
+
+<span class="nf">   </span><span class="k">Scenario:</span><span class="nf"> Access admin list</span>
+<span class="k">     When </span><span class="nf">I click &quot;</span><span class="s">Content</span><span class="nf">&quot;</span>
+<span class="nf">     </span><span class="k">Then </span><span class="nf">I should not see &quot;</span><span class="s">Access denied</span><span class="nf">&quot;</span>
+<span class="nf">     </span><span class="k">And </span><span class="nf">I should see &quot;</span><span class="s">My Articles</span><span class="nf">&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="build simple">
+<li>The background steps will be run at the beginning of each scenario</li>
+<li>You can add more background in each individual scenario</li>
+</ul>
+</div>
+<div class="section" id="scenario-outlines-gherkin">
+<h1>Scenario Outlines: Gherkin<a class="headerlink" href="#scenario-outlines-gherkin" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Datasets that have the same format can use a scenario outline.</li>
+<li>Each line in the table represents an entire scenario.<ul>
+<li>Background statements will be run</li>
+<li>All steps leading up will run</li>
+<li>The values from the table will be plugged in</li>
+</ul>
+</li>
+<li>New key words: Scenario Outline / Examples;</li>
+</ul>
+</div>
+<div class="section" id="before-the-scenario-outline">
+<h1>Before the Scenario Outline<a class="headerlink" href="#before-the-scenario-outline" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-gherkin"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span class="nf"> </span><span class="k">Scenario:</span><span class="nf"> Purchase plan</span>
+<span class="k">   Given </span><span class="nf">I am on &quot;</span><span class="s">/signup</span><span class="nf">&quot;</span>
+<span class="hll"><span class="nf">   </span><span class="k">When </span><span class="nf">I select the &quot;</span><span class="s">yearly</span><span class="nf">&quot; plan</span>
+</span><span class="hll"><span class="nf">   </span><span class="k">Then </span><span class="nf">I should see &quot;</span><span class="s">Payment Option: </span><span class="nf">&quot;Yearly&quot;</span><span class="s"></span>
+</span>
+<span class="s"> Scenario: Purchase plan</span>
+<span class="s">   Given I am on </span><span class="nf">&quot;/signup&quot;</span><span class="s"></span>
+<span class="hll"><span class="s">   When I select the </span><span class="nf">&quot;bi-annual&quot;</span><span class="s"> plan</span>
+</span><span class="hll"><span class="s">   Then I should see </span><span class="nf">&quot;Payment Option: Bi-annual&quot;</span><span class="s"></span>
+</span>
+<span class="s"> Scenario: Purchase plan</span>
+<span class="s">   Given I am on </span><span class="nf">&quot;/signup&quot;</span><span class="s"></span>
+<span class="hll"><span class="s">   When I select the </span><span class="nf">&quot;monthly&quot;</span><span class="s"> plan</span>
+</span><span class="hll"><span class="s">   Then I should see </span><span class="nf">&quot;Payment Option: Monthly&quot;</span><span class="s"></span>
+</span></pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="after-the-scenario-outline">
+<h1>After the Scenario Outline<a class="headerlink" href="#after-the-scenario-outline" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-gherkin"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="hll"><span class="nf"> </span><span class="k">Scenario Outline:</span><span class="nf"> Purchase plan</span>
+</span><span class="k">   Given </span><span class="nf">I am on &quot;</span><span class="s">/signup</span><span class="nf">&quot;</span>
+<span class="nf">   </span><span class="k">When </span><span class="nf">I select the &quot;</span><span class="nv">&lt;plan&gt;</span><span class="nf">&quot; plan</span>
+<span class="nf">   </span><span class="k">Then </span><span class="nf">I should see &quot;</span><span class="nv">&lt;text&gt;</span><span class="nf">&quot;</span>
+
+<span class="hll"><span class="nf">   </span><span class="k">Examples:</span>
+</span><span class="k">   |</span><span class="nv"> plan</span><span class="k">      |</span><span class="nv"> text</span><span class="k">                      |</span><span class="nf"></span>
+<span class="k">   |</span><span class="s"> yearly</span><span class="k">    |</span><span class="s"> Payment Option: Yearly</span><span class="k">    |</span><span class="nf"></span>
+<span class="k">   |</span><span class="s"> bi-annual</span><span class="k"> |</span><span class="s"> Payment Option: Bi-annual</span><span class="k"> |</span><span class="nf"></span>
+<span class="k">   |</span><span class="s"> monthly</span><span class="k">   |</span><span class="s"> Payment Option: Monthly</span><span class="k">   |</span>
+</pre></div>
+</td></tr></table></div>
+<p>This will run as three complete scenarios, one for each line</p>
+</div>
+<div class="section" id="tables-custom">
+<h1>Tables: Custom<a class="headerlink" href="#tables-custom" title="Permalink to this headline">¶</a></h1>
+<p>You can introduce custom steps to allow tables.</p>
+<p>These tables will NOT cause the scenario to be re-run.</p>
+<p>Instead, they&#8217;ll look for or act on elements on the same page</p>
+<a class="reference internal image-reference" href="_images/plans.png"><img alt="_images/plans.png" src="_images/plans.png" style="width: 775px;" /></a>
+</div>
+<div class="section" id="before-tables">
+<h1>Before Tables<a class="headerlink" href="#before-tables" title="Permalink to this headline">¶</a></h1>
+<p>This scenario is wordy and redundant (but automated!)</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Scenario:</span><span class="nf"> Plans from the homepage - automatable</span>
+<span class="k">  Given </span><span class="nf">I am on the homepage</span>
+<span class="nf">  </span><span class="k">When </span><span class="nf">I click &quot;</span><span class="s">Pricing &amp; Signup</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">I should see the heading &quot;</span><span class="s">Start learning Drupal now!</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">I should see &quot;</span><span class="s">Yearly</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">I should see &quot;</span><span class="s">Bi-annual</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">I should see &quot;</span><span class="s">Monthly</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">I should see &quot;</span><span class="s">$420</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">I should see &quot;</span><span class="s">$240</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">And </span><span class="nf">I should see &quot;</span><span class="s">$45</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="after-tables">
+<h1>After Tables<a class="headerlink" href="#after-tables" title="Permalink to this headline">¶</a></h1>
+<p>This is easier to scan</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Scenario:</span><span class="nf"> Plans from the homepage - less redundant</span>
+<span class="k">  Given </span><span class="nf">I am on &quot;</span><span class="s">/signup</span><span class="nf">&quot;</span>
+<span class="nf">  </span><span class="k">Then </span><span class="nf">I should see the following </span><span class="nv">&lt;text&gt;</span><span class="nf">:</span>
+
+<span class="k">  |</span><span class="s">text</span><span class="k">      |</span><span class="nf"></span>
+<span class="k">  |</span><span class="s">Yearly</span><span class="k">    |</span><span class="nf"></span>
+<span class="k">  |</span><span class="s">Bi-annual</span><span class="k"> |</span><span class="nf"></span>
+<span class="k">  |</span><span class="s">Monthly</span><span class="k">   |</span><span class="nf"></span>
+<span class="k">  |</span><span class="s">$420</span><span class="k">      |</span><span class="nf"></span>
+<span class="k">  |</span><span class="s">$240</span><span class="k">      |</span><span class="nf"></span>
+<span class="k">  |</span><span class="s">$45</span><span class="k">       |</span>
+</pre></div>
+</div>
+<p>This is just a single scenario. Note the absense of the key words Scenario Outling and Examples</p>
+</div>
+<div class="section" id="custom-code-to-support-this-table-step">
+<h1>Custom code to support this table step:<a class="headerlink" href="#custom-code-to-support-this-table-step" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="sd">/**</span>
+<span class="sd">* Check for several text values on a single page using a table of values</span>
+<span class="sd">*</span>
+<span class="sd">* @Then /^I (?:should |)see the following &lt;text&gt;:$/</span>
+<span class="sd">*/</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">iShouldSeeTheFollowingText</span><span class="p">(</span><span class="nx">TableNode</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$page</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getSession</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getPage</span><span class="p">();</span>
+  <span class="nv">$table</span> <span class="o">=</span> <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">getHash</span><span class="p">();</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$table</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$text</span> <span class="o">=</span> <span class="nv">$table</span><span class="p">[</span><span class="nv">$key</span><span class="p">][</span><span class="s1">&#39;text&#39;</span><span class="p">];</span>
+      <span class="k">if</span><span class="p">(</span><span class="nv">$page</span><span class="o">-&gt;</span><span class="na">hasContent</span><span class="p">(</span><span class="nv">$text</span><span class="p">)</span> <span class="o">===</span> <span class="k">FALSE</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">\Exception</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s2">&quot;The text &#39;%s&#39; was not found&quot;</span><span class="p">,</span> <span class="nv">$text</span><span class="p">));</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+ <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="better-custom-code-to-support-this-step">
+<h1>Better custom code to support this step<a class="headerlink" href="#better-custom-code-to-support-this-step" title="Permalink to this headline">¶</a></h1>
+<p>The previous snippet fails the first time a piece of text doesn&#8217;t match, but since they&#8217;re not dependent, a better approach is to return the success or failue of all the checks:</p>
+<div class="small highlight-php"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span class="x"> </span><span class="cp">&lt;?</span>
+   <span class="sd">/**</span>
+<span class="sd">    * @Given /^I (?:should |)see the following &lt;texts&gt;$/</span>
+<span class="sd">    */</span>
+   <span class="k">public</span> <span class="k">function</span> <span class="nf">iShouldSeeTheFollowingTexts</span><span class="p">(</span><span class="nx">TableNode</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
+     <span class="nv">$page</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getSession</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getPage</span><span class="p">();</span>
+     <span class="nv">$messages</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+     <span class="nv">$failure_detected</span> <span class="o">=</span> <span class="k">FALSE</span><span class="p">;</span>
+     <span class="nv">$table</span> <span class="o">=</span> <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">getHash</span><span class="p">();</span>
+     <span class="k">foreach</span> <span class="p">(</span><span class="nv">$table</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nv">$text</span> <span class="o">=</span> <span class="nv">$table</span><span class="p">[</span><span class="nv">$key</span><span class="p">][</span><span class="s1">&#39;texts&#39;</span><span class="p">];</span>
+       <span class="k">if</span><span class="p">(</span><span class="nv">$page</span><span class="o">-&gt;</span><span class="na">hasContent</span><span class="p">(</span><span class="nv">$text</span><span class="p">)</span> <span class="o">===</span> <span class="k">FALSE</span><span class="p">)</span> <span class="p">{</span>
+         <span class="nv">$messages</span><span class="p">[]</span> <span class="o">=</span> <span class="s2">&quot;FAILED: The text &#39;&quot;</span> <span class="o">.</span> <span class="nv">$text</span> <span class="o">.</span> <span class="s2">&quot;&#39; was not found&quot;</span><span class="p">;</span>
+         <span class="nv">$failure_detected</span> <span class="o">=</span> <span class="k">TRUE</span><span class="p">;</span>
+       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+         <span class="nv">$messages</span><span class="p">[]</span> <span class="o">=</span> <span class="s2">&quot;PASSED: &#39;&quot;</span> <span class="o">.</span> <span class="nv">$text</span> <span class="o">.</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">;</span>
+       <span class="p">}</span>
+     <span class="p">}</span>
+     <span class="k">if</span> <span class="p">(</span><span class="nv">$failure_detected</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="nb">implode</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nv">$messages</span><span class="p">));</span>
+     <span class="p">}</span>
+   <span class="p">}</span>
+ <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="featurecontext">
+<h1>FeatureContext<a class="headerlink" href="#featurecontext" title="Permalink to this headline">¶</a></h1>
+<ul class="bullets simple">
+<li>FeatureContext maps the steps of every .feature file in your features directory to the actual php code.<ul>
+<li>Feature files are a description of business rules</li>
+<li>The FeatureContext is the description of how to actually test them.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="exception-failure">
+<h1>Exception = Failure<a class="headerlink" href="#exception-failure" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>The custom code will return success until an exception is thrown</li>
+<li>If the definition method doesn&#8217;t throw an exception, the step gets marked as passing</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Simplify</a></li>
+<li><a class="reference internal" href="#backgrounds-gherkin">Backgrounds: Gherkin</a></li>
+<li><a class="reference internal" href="#scenario-outlines-gherkin">Scenario Outlines: Gherkin</a></li>
+<li><a class="reference internal" href="#before-the-scenario-outline">Before the Scenario Outline</a></li>
+<li><a class="reference internal" href="#after-the-scenario-outline">After the Scenario Outline</a></li>
+<li><a class="reference internal" href="#tables-custom">Tables: Custom</a></li>
+<li><a class="reference internal" href="#before-tables">Before Tables</a></li>
+<li><a class="reference internal" href="#after-tables">After Tables</a></li>
+<li><a class="reference internal" href="#custom-code-to-support-this-table-step">Custom code to support this table step:</a></li>
+<li><a class="reference internal" href="#better-custom-code-to-support-this-step">Better custom code to support this step</a></li>
+<li><a class="reference internal" href="#featurecontext">FeatureContext</a></li>
+<li><a class="reference internal" href="#exception-failure">Exception = Failure</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="2-scenarios.html"
+                        title="previous chapter">Elaborate</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="4-commandline.html"
+                        title="next chapter">Selecting which Tests to Run</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/3-simplify.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="4-commandline.html" title="Selecting which Tests to Run"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="2-scenarios.html" title="Elaborate"
+             >previous</a> |</li>
+        <li><a href="index.html">Quality Assurance using Behat and the Drupal Extension 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Melissa Anderson and Jonathan Hedstrom.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

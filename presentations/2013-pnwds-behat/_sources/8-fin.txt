@@ -1,0 +1,11 @@
+Questions?
+==========
+
+ * Slides http://jhedstrom.github.io/presentations/2013-pnwds-behat
+ * Drupal Extension http://drupal.org/project/drupalextension
+ * Drupal Extension Documentation http://dspeak.com/drupalextension/
+ * Behat Documentation http://docs.behat.org/
+ * Mink Extension Documentation http://extensions.behat.org/mink/
+
+.. image:: _static/behatdrupal.jpg
+   :align: center

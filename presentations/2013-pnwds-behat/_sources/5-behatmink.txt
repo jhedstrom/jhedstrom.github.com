@@ -1,0 +1,369 @@
+.. slide:: NoTitle
+
+
+  .. image:: _static/behat.png
+
+  .. rst-class:: build bullet
+
+    * Connects feature files with their step definitions
+    * Provides the framework to configure the tests
+    * Does NOT connect tests with drivers (That's Mink)
+    * Handles exceptions
+    * You can use Mink without Behat, and Behat without Mink.
+
+Example Feature (from the Behat documentation)
+==============================================
+http://docs.behat.org/quick_intro.html#basic-usage
+
+.. code-block:: gherkin
+   
+  Feature: ls
+    In order to see the directory structure
+    As a UNIX user
+    I need to be able to list the current directory's contents
+
+    Scenario: List 2 files in a directory
+      Given I have a file named "foo"
+      And I have a file named "bar"
+      When I run "ls"
+      Then I should see "foo" in the output
+      And I should see "bar" in the output
+
+FeatureContext implementation
+=============================
+
+Without the addition of Mink, a Behat test is limited to system commands and straight PHP.
+
+.. rst-class:: small
+
+.. literalinclude:: _static/ls.feature
+   :language: php
+   :linenos:
+
+.. slide:: NoTitle
+
+  .. image:: _static/mink.png
+
+
+  Mink is a web acceptance testing framework or browser emulator abstraction layer.
+
+  It operates on a collection of 5 element types:
+
+  .. rst-class:: build bullet
+
+    *    Browser emulation drivers - connection between Mink and real browser emulators
+    *    Session - represents a single browser instance
+    *    Page - represents a webpage in some specific browser (session)
+    *    Page element - an element on specific webpage
+    *    Selector - a way to select (describe) and traverse element on page
+
+Driver
+======
+http://mink.behat.org/api/behat/mink/driver/coredriver.html
+
+.. rst-class:: build
+
+* A driver is the main building block of Mink. Mink supports different drivers and each driver provides support for a different browser emulator.
+
+* Drivers are classes that implement the DriverInterface interface.  They can be instantiated them like any other class:
+
+  .. literalinclude:: driver.inc.rst
+     :linenos:
+     :lines: 3-5
+
+* Drivers live under the ``Behat\Mink\Driver\*`` namespace and have a Driver suffix.
+
+  * Goutte - headless, purely php driver
+  * Sahi - browser controller
+  * Selenium - browser controller
+  * Selenium2 (webdriver) - browser controller
+  * Zombie.js - headless JS driver
+
+Session
+=======  
+http://mink.behat.org/api/behat/mink/session.html
+
+The session is a simple PHP object, that expects a driver instance:
+  
+.. literalinclude:: /session-0.inc.rst
+   :language: php
+   :linenos:
+   :lines: 3
+
+The session provides methods to control the browser:
+ 
+.. literalinclude:: session.inc.rst
+   :language: php
+   :linenos:
+   :lines: 3-7
+
+
+Page
+====
+http://mink.behat.org/api/behat/mink/session.html#getPage%28%29
+
+The Page provides access to elements and a way to traverse/manipulate them. You can get the Page from the session via the getPage() method:
+ 
+.. code-block:: php
+
+  // get page:
+  $page = $session->getPage();
+   
+  // get page content:
+  echo $page->getContent();
+   
+  // get page text:
+  echo $page->getText();
+
+Selectors
+=========
+http://mink.behat.org/api/behat/mink/selector/package-summary.html
+
+Selectors provide a way to traverse (select) elements on the page.
+ 
+.. code-block:: php
+
+  $cssSelector = new \Behat\Mink\Selector\CssSelector();
+ 
+  // generate an XPath query out of CSS:
+  echo $cssSelector->translateToXPath('h1 > a');
+ 
+.. code-block:: php
+
+  $handler = new \Behat\Mink\Selector\SelectorsHandler();
+  $handler->registerSelector('css', $cssSelector);
+   
+  // generate XPath query out of CSS:
+  echo $handler->selectorToXpath('css', 'h1 > a');
+
+Selectors: Find and FindAll
+===========================
+
+To find specific element on page, use find* methods:
+ 
+.. code-block:: php
+
+  $selectorHandler = $session->getSelectorsHandler();
+ 
+  // find single element on page by name:
+  $fieldElement = $page->find('named',
+      array('field', $selectorHandler->xpathLiteral('id|name|value|label'))
+  );
+  // by CSS
+  $elementByCss = $page->find('css', 'h3 > a');
+
+Element
+=======
+http://mink.behat.org/api/behat/mink/element/package-summary.html
+
+Provides a way to manage specific element on page.
+
+.. code-block:: php
+
+  $element = $page->find('css', '.class-selector');
+   
+  // get tag name:
+  echo $elelement->getTagName();
+   
+  // check that element has href attribute:
+  $element->hasAttribute('href');
+   
+  // get element's href attribute:
+  echo $element->getAttribute('href');
+   
+  $element->click();
+
+The most used API document:
+http://mink.behat.org/api/behat/mink/element/traversableelement.html
+
+Testing the interface
+=====================
+
+Writing a scenerio for the following feature for the first time might look like this using pre-existing steps:
+
+.. code-block:: gherkin
+   :linenos:
+
+    @front @forums @javascript
+    Feature: Forum posts on front page
+      In order to get help with Drupal 
+      As an authenticated
+      I should be able to create a forum post
+
+    Scenario: Supply all the required fields
+      Given I am logged in as "site user"
+      And I follow "Add content"
+      When I click "Add a new Forum topic"
+      And I fill in "Title" with "A new forum topic"
+      And I fill in "Body" with "Some text"
+      And I press "Save"
+      Then I should see "A new forum topic has been created"
+
+
+Creating a known state
+======================
+
+What about when I'm looking at how that post should move throughout the site. I need data to exist, but I don't want to click through this every time.
+
+.. code-block:: gherkin
+   :linenos:
+   :emphasize-lines: 9
+
+    @front @forums @javascript
+    Feature: Forum posts on front page
+      In order to see recent activity and news in the forums
+      As any user
+      I should be able to view links to the latest forum posts on the front page
+
+      @cache
+      Scenario: Forum Posts tab on front page
+        Given there is a new forum topic
+        And the cache is cleared
+        And I am on the homepage
+        When I click the "Forum Posts" tab
+        Then I should see the forum topic link
+
+Step-chaining
+=============
+
+.. code-block:: php
+   :linenos:
+   :emphasize-lines: 1
+
+    <?php
+
+     ... 
+
+    /**
+     * @Given /^there is a new "([^"]*)" forum topic$/
+     */
+    public function thereIsANewForumTopic($forum) {
+      return array (
+        new Given('I am logged in as the "site user"'),
+        new Given('I am at "/node/add/forum/0"'),
+        new Given('I fill in "Title" with "A new forum topic"'),
+        new Given('I fill in "Body" with "Some text"'),
+        new Given('I press "Save"'),
+        new Given ("I am not logged in")
+        // User should be logged out after data set up
+      );
+    }
+
+    ...
+
+    ?>
+
+
+Write the steps directly
+========================
+
+.. code-block:: php
+   :linenos:
+
+    <?php
+
+     ...
+
+    /**
+     * @Given /^there is a new "([^"]*)" forum topic$/
+     */
+
+      $page = $this->getSession()->getPage();
+      $this->iAmLoggedInAs("site user");
+      $this->getSession()->visit('/node/add/forum/0');
+      $page->fillField("Title","A title"
+      $page->fillField("Body", "Body text");
+      $page->pressButton('Save');
+      $this->assertPageContainsText("A new forum topic has been created");
+    }
+
+   ?>
+
+Use the API
+===========
+Given a "forum" node with the title "A new forum topic"
+
+.. code-block:: php
+   :linenos:
+
+    <?php 
+
+      ...
+
+      /**
+       * @Given /^I am viewing (?:a|an) "(?P<type>[^"]*)" node with the title "(?P<title>[^"]*)"$/
+       * @Given /^(?:a|an) "(?P<type>[^"]*)" node with the title "(?P<title>[^"]*)"$/
+      */
+      public function createNode($type, $title) {
+        // @todo make this easily extensible.
+        $node = (object) array(
+          'title' => $title,
+          'type' => $type,
+          'body' => $this->randomString(255),
+        );
+        $saved = $this->getDriver()->createNode($node);
+        $this->nodes[] = $saved;
+
+        // Set internal page on the new node.
+        $this->getSession()->visit($this->locatePath('/node/' . $saved->nid));
+      }
+
+    ?>
+
+Hooking into the Process
+========================
+http://docs.behat.org/guides/3.hooks.html
+
+In FeatureContext.php file, you can hook into the testing process using annotations on the methods:
+
+.. rst-class:: column-1 bullet
+
+* BeforeSuite
+* AfterSuite
+* BeforeFeature
+* AfterFeature
+* BeforeScenario
+* AfterScenario
+* BeforeStep
+* AfterStep
+
+.. rst-class:: column-2 bullet
+
+Why?
+
+  * Set up conditions
+  * Clean up data that gets created
+  * Take a snapshot of the page at the time of failure
+
+@AfterScenario to clean up data
+===============================
+
+.. code-block:: php 
+  :linenos:
+  :emphasize-lines: 6
+
+    <?php    
+      
+    /**
+     * Run after every scenario.
+     *
+     * @AfterScenario
+     */
+    public function afterScenario($event) {
+      // Remove any nodes that were created.
+      if (!empty($this->nodes)) {
+        foreach ($this->nodes as $node) {
+          $this->getDriver()->nodeDelete($node);
+        }
+      }
+
+      // Remove any users that were created.
+      if (!empty($this->users)) {
+        foreach ($this->users as $user) {
+          $this->getDriver()->userDelete($user);
+        }
+        $this->getDriver()->processBatch();
+      }
+    }
+
+   ?>

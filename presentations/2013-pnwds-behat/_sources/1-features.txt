@@ -1,0 +1,107 @@
+Gherkin Feature Stanzas
+=======================
+
+.. rst-class:: bullet 
+
+* There can only be one feature per file
+
+* Every feature starts with:
+
+  * Feature: {Title}
+
+* Followed by narrative:
+
+  * In order to {achieve a benefit}
+  * As a {role or user}
+  * I need to {do something}
+
+.. note::
+
+      The feature stanza is never executed, but it *is* parsed. The "Feature:" label MUST be present at the top of each feature file.
+
+Gherkin Scenario Format
+=======================
+
+**Given**:  Defines the initial state of the system for the scenario
+
+.. code-block:: gherkin
+
+  Given I am on the homepage
+
+**When**: Describes the action performed on the system
+
+.. code-block:: gherkin
+
+  When I press "Log in"
+
+**Then**: Describes the system state after the action has been performed
+
+.. code-block:: gherkin
+
+  Then I should see "Username field is required"
+
+**And**, **But**: Can be added to any of the above
+
+.. code-block:: gherkin
+
+  And I should see "Password field is required"
+
+.. rst-class:: bullet build
+
+* Each line is called a Step
+* Each step is supported by PHP code
+
+The whole feature
+=================
+
+``features/login.feature``
+
+.. code-block:: gherkin
+
+  Feature: Maintain content
+    In order to maintain site content
+    As an editor
+    I need to log in
+
+    Scenario: Enter valid username and password // Happy path
+      Given I am on the homepage
+      When I fill in "admin" for "Username"
+      And I fill in "admin" for "Password"
+      And I press "Log in"
+      Then I should see "Add content"
+
+    Scenario: Fail to enter username or password // Less happy path
+      Given I am on the homepage
+      When I press "Log in"
+      Then I should see "Username field is required"
+      And I should see "Password field is required"
+
+Scenario Style
+==============
+
+.. rst-class:: build bullet
+
+* Every scenario is indendent
+* Always from perspecitve of the role identified in the feature
+* No more than 6 - 8 scenarios per feature
+* One Given: Set the scene
+* One When: Change the scene
+* One Then: Observe the outcome
+* Each with as many Ands or Buts as needed
+
+Example
+-------
+
+Once a step definition is written in PHP, the step can be re-used: 
+
+.. code-block:: gherkin
+
+  Scenario: Access free content
+    Given I am on "/series/learning-sass-and-compass"
+    When I follow "What is a CSS Preprocessor?"
+    Then I should see "What is a CSS Preprocessor?"
+    And I should see "Interactive Transcripts"
+
+.. image:: _static/dm-teasers.png
+   :width: 675 px
+   :align: center

@@ -1,0 +1,6 @@
+.. include:: 0-foundation.rst 
+.. include:: 1-features.rst
+.. include:: 2-scenarios.rst
+.. include:: 6-drupalextension.rst 
+.. include:: 7-drupal9.rst
+.. include:: 8-fin.rst

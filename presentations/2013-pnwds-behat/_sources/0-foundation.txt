@@ -1,0 +1,199 @@
+Quality Assurance using Behat and the Drupal Extension
+======================================================
+
+.. include:: byline.inc
+
+Because Drupal has:
+===================
+
+.. rst-class:: build bullet
+ 
+* Powerful value added by non-developers
+* Complex module interactivity
+* Frequent security updates with functionality changes 
+
+We need to:
+===========
+
+.. rst-class:: build bullet
+
+* Know how users are expected to move through the application
+* Know how the application is expected to respond
+* Keep that knowledge in sync with changes
+* Test that those user paths work 
+
+Because our applications are:
+=============================
+
+.. rst-class:: build bullet
+
+* dependent on third-party libraries
+* integrated with third-party services
+* highly visible
+* globally accessible 
+
+
+We need to be able to:
+======================
+
+.. rst-class:: build bullet
+
+* Develop rapidly
+* Deploy frequently
+
+Describe
+========
+Our goal is to describe application behavior in a way ...
+
+.. code-block:: gherkin
+
+  Feature: Forum posts on front page
+    In order to see recent activity and news in the forums
+    As any user
+    I should be able to view links to the latest forum posts on the front page
+
+
+    Scenario: Forum Posts tab on front page
+      Given there is a new "Paid Drupal services" forum topic
+      And the cache is cleared
+      And I am on the homepage
+      When I follow "Forum Posts"
+      Then I should see the forum topic link
+      And I should see the link "More forums"
+
+Automate
+========
+
+...that we can turn into automated, browser-clicking functional tests:
+
+.. raw:: html 
+
+    <a href="file:///home/melissa/Downloads/drupalorgforum-edited.mp4"><img src="_static/video.png" width="256" height="256"></a>
+
+
+From a BDD Perspective
+======================
+
+.. rst-class:: build
+
+* Automatable functional tests are *only* a bonus
+
+  * They are **not** the primary goal of BDD
+  * They do **not** replace unit tests
+
+* BDD is about
+
+  * Discovering what we need to build
+  * Ensuring what we build has value
+  * When we test, focusing our tests on the *right* things  
+
+Types of Testing
+================
+
+.. rst-class:: build bullet
+
+* Unit Testing (Classes or methods)
+* Integration Testing (Multiple classes interacting)
+* Functional Testing (Automated testing against acceptance criteria)
+* GUI Testing (Automated testing in a graphical brower)
+* Manual Testing (Human click-testing)
+
+At the Core
+===========
+
+.. rst-class:: build bullet
+
+  * TDD tests tell programmers their code is working
+  * BDD tests ensure that the application is delivering business value
+  * http://www.tomslabs.com/index.php/2011/04/test-automation-strategy/
+
+Dealing with Technical Debt
+===========================
+
+.. image:: _static/triangle-debt.png
+   :align: center
+   :width: 600 
+
+http://www.matthewbussa.com/2011/01/evolution-of-automated-testing.html
+
+
+Building a Solid Foundation
+===========================
+
+.. image:: _static/triangle.png
+   :align: center
+   :width: 600
+
+
+The Roots of BDD: Test-Driven Development
+=========================================
+
+* Cycle: 
+
+  * Add a test
+  * Run tests and see the new one fail
+  * Write some code
+  * Run the automated tests and see them succeed
+  * Refactor code
+  * Repeat
+
+* Purpose
+
+  * Encourage simple designs
+  * Facilitate short release cycles
+  * Provide higher confidence in releases
+ 
+Behavior-Driven Development
+===========================
+
+Behavior-driven development emerged from test-driven development, to answer these questions:
+
+.. rst-class:: build bullet
+
+*  Where do I start?
+*  What do I test?
+*  How much do I test in one go?
+*  What do I call the tests?
+*  How can I understand why a test fails?
+
+Fundamental Principles of Story BDD
+===================================
+
+Ignorance
+---------
+
+.. epigraph:: 
+
+    Ignorance is the biggest constraint in software development
+
+    -- Dan North
+
+Value
+-----
+
+.. epigraph::
+
+    Every feature should have a measurable business value
+
+
+Communication
+-------------
+
+.. epigraph::
+
+    Everyone on the team should have a common language to describe the site
+
+Conversation
+------------
+
+.. epigraph::
+
+    | Having conversations
+    | is more important than
+    | Capturing conversations
+    | is more important than 
+    | Automating conversations
+
+  -- Liz Keough
+
+

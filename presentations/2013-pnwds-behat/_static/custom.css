@@ -1,0 +1,198 @@
+#quality-assurance-using-behat-and-the-drupal-extension ul {
+  list-style-type: none;
+}
+
+article h2, article h3 {
+    margin-top: 0px;
+    padding-bottom: 5px;
+    padding-left: 0px;
+    margin-bottom: 8%;
+    position: relative;
+    top: 5%;
+    font-family: 'Droid Sans',sans-serif;
+    font-size: 175%;
+    vertical-align: bottom;
+}
+
+article h1 {
+  margin: 5% 0;
+}
+
+.level-2 {
+  font-size: 127%;
+  margin: 3% 0;
+}
+
+.slides > article {
+  font-size: .7em;
+}
+
+.admonition-notitle-demo h1,
+.admonition-notitle-demo h2,
+.admonition-notitle-demo h3,
+.admonition-notitle-demo h4,
+.admonition-notitle h1,
+.admonition-notitle h2,
+.admonition-notitle h3,
+.admonition-notitle h4 {
+  display: none;
+}
+
+article.admonition-notitle-demo {
+  border-width: 5px;
+  border-color: #aaa;
+}
+
+ul li:before {
+  content: "";
+}
+
+
+ul ul {
+  margin-bottom: 5%;
+}
+
+ul ul li {
+  font-weight: 100;
+  line-height: 1.1;
+}
+
+ul.inline li {
+  display: inline;
+}
+
+article blockquote.epigraph {
+  min-height: 200px;
+  padding: 10% 10% 10% 20%;
+  margin: 3% 0;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+
+article blockquote.epigraph  { 
+  background-image: url('leftquote.png');
+  background-repeat: no-repeat;
+  background-position: left top; 
+}
+
+article blockquote.epigraph .line-block {
+  margin: 0;
+}
+
+article .column-1 {
+  width: 40%;
+  float: left;
+  margin-top: 0;
+}
+
+.byline ul, .byline li, .byline ul.simple {
+  list-style: none;
+}
+
+article ul.simple,
+article ul {
+  margin-top: 1em;
+}
+
+article ul li p.first {
+  margin-top: 0;
+}
+
+ul,
+ul.simple {
+  list-style-type: circle;
+  padding-left: 5%;
+}
+
+ul.simple ul {
+  list-style-type: circle;
+  padding-left: 8%;
+}
+
+pre {
+  margin-top: 0;
+  box-shadow: none;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.highlighttable pre {
+  padding: 10px;
+  margin: 0px;
+}
+
+dt {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+table.highlighttable td {
+  margin: 0;
+  padding: 0;
+}
+
+.column-1 table,
+.column-2 table {
+  width: auto;
+}
+
+td.linenos pre {
+  padding: 10px 5px; 
+}
+
+img {
+  padding-top: 10px;
+}
+
+pre {
+  font-family: monospace;
+  font-size: 70%;
+}
+
+ul ul ul {
+  margin-top: 10px;
+}
+
+ul ul ul li {
+  margin-bottom: 4px;
+}
+
+.slides > article {
+  padding: 20px 60px;
+}
+
+section+article.fundamentals {
+  color: blue;
+}
+
+.admonition-todo {
+  color: white;
+  background: red;
+}
+
+article .column-2,
+article ul.simple .column-2
+ {
+  margin: 0 0 0 50%;
+}
+
+ul.simple {
+  list-style-type: none;
+}
+
+ul.bullet {
+  list-style-type: circle;
+}
+
+.tiny {
+  font-size: 50%;
+}
+
+.large {
+  font-size: 140%;
+}
+
+.small {
+  font-size: 80%;
+  color: blue;
+}

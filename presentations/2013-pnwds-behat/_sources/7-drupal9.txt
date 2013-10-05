@@ -1,0 +1,60 @@
+Drupal 9
+========
+
+.. rst-class:: build bullets
+
+ * Replace behavioral/functional SimpleTests with Behat
+ * Replace others with PHPUnit
+
+Testing the node form buttons (SimpleTest)
+------------------------------------------
+
+This code goes on for 89 lines, to test the *node form buttons*.
+
+.. code-block:: php
+
+  <?php
+  /**
+   * Tests that the right buttons are displayed for saving nodes.
+   */
+  function testNodeFormButtons() {
+
+    // Login as administrative user.
+    $this->drupalLogin($this->admin_user);
+
+    // Verify the buttons on a node add form.
+    $this->drupalGet('node/add/article');
+    $this->assertButtons(array(t('Save and publish'), t('Save as unpublished')));
+
+    // Save the node and assert it's published after clicking
+    // 'Save and publish'.
+    $edit = array('title' => $this->randomString());
+    $this->drupalPostForm('node/add/article', $edit, t('Save and publish'));
+
+    // Get the node.
+    $node_1 = node_load(1);
+    $this->assertTrue($node_1->isPublished(), 'Node is published');
+
+    // Verify the buttons on a node edit form.
+    $this->drupalGet('node/' . $node_1->id() . '/edit');
+    $this->assertButtons(array(t('Save and keep published'), t('Save and unpublish')));
+
+    // Save the node and verify it's still published after clicking
+    // 'Save and keep published'.
+    $this->drupalPostForm(NULL, $edit, t('Save and keep published'));
+    $node = node_load(1, TRUE);
+    $this->assertTrue($node_1->isPublished(), 'Node is published');
+
+
+Testing the node form buttons (Behat)
+-------------------------------------
+
+A start at replacing the previous (not complete, but close).
+
+.. code-block:: gherkin
+
+  Given I am logged in as a user with the "administer nodes, bypass node access" permissions
+  When I visit "node/add/article"
+  And fill in "Title" with "A sample node title"
+  And press "Save and publish"
+  Then I should see the heading "A sample node title"

@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Drupal 9 &mdash; Quality Assurance using Behat and the Drupal Extension 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Quality Assurance using Behat and the Drupal Extension 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Quality Assurance using Behat and the Drupal Extension 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="drupal-9">
+<h1>Drupal 9<a class="headerlink" href="#drupal-9" title="Permalink to this headline">¶</a></h1>
+<ul class="build bullets simple">
+<li>Replace behavioral/functional SimpleTests with Behat</li>
+<li>Replace others with PHPUnit</li>
+</ul>
+<div class="section" id="testing-the-node-form-buttons-simpletest">
+<h2>Testing the node form buttons (SimpleTest)<a class="headerlink" href="#testing-the-node-form-buttons-simpletest" title="Permalink to this headline">¶</a></h2>
+<p>This code goes on for 89 lines, to test the <em>node form buttons</em>.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="sd">/**</span>
+<span class="sd"> * Tests that the right buttons are displayed for saving nodes.</span>
+<span class="sd"> */</span>
+<span class="k">function</span> <span class="nf">testNodeFormButtons</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="c1">// Login as administrative user.</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">drupalLogin</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">admin_user</span><span class="p">);</span>
+
+  <span class="c1">// Verify the buttons on a node add form.</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">drupalGet</span><span class="p">(</span><span class="s1">&#39;node/add/article&#39;</span><span class="p">);</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertButtons</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="nx">t</span><span class="p">(</span><span class="s1">&#39;Save and publish&#39;</span><span class="p">),</span> <span class="nx">t</span><span class="p">(</span><span class="s1">&#39;Save as unpublished&#39;</span><span class="p">)));</span>
+
+  <span class="c1">// Save the node and assert it&#39;s published after clicking</span>
+  <span class="c1">// &#39;Save and publish&#39;.</span>
+  <span class="nv">$edit</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">randomString</span><span class="p">());</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">drupalPostForm</span><span class="p">(</span><span class="s1">&#39;node/add/article&#39;</span><span class="p">,</span> <span class="nv">$edit</span><span class="p">,</span> <span class="nx">t</span><span class="p">(</span><span class="s1">&#39;Save and publish&#39;</span><span class="p">));</span>
+
+  <span class="c1">// Get the node.</span>
+  <span class="nv">$node_1</span> <span class="o">=</span> <span class="nx">node_load</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="nv">$node_1</span><span class="o">-&gt;</span><span class="na">isPublished</span><span class="p">(),</span> <span class="s1">&#39;Node is published&#39;</span><span class="p">);</span>
+
+  <span class="c1">// Verify the buttons on a node edit form.</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">drupalGet</span><span class="p">(</span><span class="s1">&#39;node/&#39;</span> <span class="o">.</span> <span class="nv">$node_1</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;/edit&#39;</span><span class="p">);</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertButtons</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="nx">t</span><span class="p">(</span><span class="s1">&#39;Save and keep published&#39;</span><span class="p">),</span> <span class="nx">t</span><span class="p">(</span><span class="s1">&#39;Save and unpublish&#39;</span><span class="p">)));</span>
+
+  <span class="c1">// Save the node and verify it&#39;s still published after clicking</span>
+  <span class="c1">// &#39;Save and keep published&#39;.</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">drupalPostForm</span><span class="p">(</span><span class="k">NULL</span><span class="p">,</span> <span class="nv">$edit</span><span class="p">,</span> <span class="nx">t</span><span class="p">(</span><span class="s1">&#39;Save and keep published&#39;</span><span class="p">));</span>
+  <span class="nv">$node</span> <span class="o">=</span> <span class="nx">node_load</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">);</span>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="nv">$node_1</span><span class="o">-&gt;</span><span class="na">isPublished</span><span class="p">(),</span> <span class="s1">&#39;Node is published&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing-the-node-form-buttons-behat">
+<h2>Testing the node form buttons (Behat)<a class="headerlink" href="#testing-the-node-form-buttons-behat" title="Permalink to this headline">¶</a></h2>
+<p>A start at replacing the previous (not complete, but close).</p>
+<div class="highlight-gherkin"><div class="highlight"><pre><span class="k">Given </span><span class="nf">I am logged in as a user with the &quot;</span><span class="s">administer nodes, bypass node access</span><span class="nf">&quot; permissions</span>
+<span class="k">When </span><span class="nf">I visit &quot;</span><span class="s">node/add/article</span><span class="nf">&quot;</span>
+<span class="k">And </span><span class="nf">fill in &quot;</span><span class="s">Title</span><span class="nf">&quot; with &quot;</span><span class="s">A sample node title</span><span class="nf">&quot;</span>
+<span class="k">And </span><span class="nf">press &quot;</span><span class="s">Save and publish</span><span class="nf">&quot;</span>
+<span class="k">Then </span><span class="nf">I should see the heading &quot;</span><span class="s">A sample node title</span><span class="nf">&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Drupal 9</a><ul>
+<li><a class="reference internal" href="#testing-the-node-form-buttons-simpletest">Testing the node form buttons (SimpleTest)</a></li>
+<li><a class="reference internal" href="#testing-the-node-form-buttons-behat">Testing the node form buttons (Behat)</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/7-drupal9.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html">Quality Assurance using Behat and the Drupal Extension 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Melissa Anderson and Jonathan Hedstrom.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
+    </div>
+  </body>
+</html>

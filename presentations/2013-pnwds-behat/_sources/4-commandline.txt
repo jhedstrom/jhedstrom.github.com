@@ -1,0 +1,82 @@
+Selecting which Tests to Run
+============================
+
+Group tests by:
+
+.. rst-class:: build bullet
+
+* Feauture file name
+* File name and scenario line number
+* Directory or subdirectory
+* Arbitrary tag
+* Feature and scenario name
+ 
+Based on Specific .feature File
+===============================
+
+``bin/behat features/byfile.feature``
+   All scenarios in the feature, no wildcards allowed
+``bin/behat features/byfile.feature:21``
+   A scenario beginning on line 21. Supply the line number with Scenario: or Scenario Outline:, not the line with tags (if any)
+
+Based on File Structure
+=======================
+
+``bin/behat`` 
+  Everything in ``yourproject/features``, recursively
+``bin/behat/subfolder``
+   Everything in that folder, recursively
+
+You can't run them with wildcards.
+
+Based on Feature or Scenario Names
+==================================
+
+The JUnit output in Jenkins shows only name, not the file or line number, etc.
+
+``bin/behat --name "Add a case study"``
+  All the scenarios in the feature file
+``bin/behat --name "View case study guidelines"``
+   A specific scenario
+``bin/behat --name "case"``
+  All features or scenarios with the word case in their title
+
+.. image:: _static/jenkinsoutput.png
+   :width: 400px
+   :align: center
+
+Based on Tags
+=============
+
+.. rst-class:: build bullet
+
+* You can make up arbiratry tags and run scenarios based on those tags.
+* Tagging the Feature is the equivilent of tagging all scenarios in it
+* Scenarios can be tagged with more than one tag (but it must be on the same line)
+* You can use complex logic with tags
+
+Magic tags
+==========
+
+@javascript
+   Will cause a test to use a configured Web browser rather than the default text-only
+
+@api
+  Will cause the test to use the Drupal API, and will only succeed if the tests and site are on the same machine
+
+Conventions
+===========
+
+@wip 
+  denotes a feature or scenario that is not finished
+
+@silence
+  denotes a test that shouldn't be included in Continuous Integration because it's unreliable (or for any other reason)
+
+
+Resources
+=========
+
+ * Documentation is available at http://docs.behat.org/guides/6.cli.html#gherkin-filters
+ * Drupal.org tagging strategy: https://drupal.org/node/1780048
+
