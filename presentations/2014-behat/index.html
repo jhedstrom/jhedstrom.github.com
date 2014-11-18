@@ -1,0 +1,689 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>BDD, Behat, and Drupal</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+
+  <link rel="stylesheet" href=".//css/reset.css" type="text/css"/>
+
+  
+  <link rel="icon" href="one/favicon.ico"/>
+  
+
+  <link type="text/css" href=".//css/fg.menu.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href=".//css/theme/ui.all.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href=".//css/sh_style.css" rel="stylesheet" />
+  <link type="text/css" href=".//css/tipsy.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href=".//css/showoff.css" type="text/css"/>
+
+  <script type="text/javascript" src=".//js/jquery-1.4.2.min.js"></script>
+  <script type="text/javascript" src=".//js/jquery.cycle.all.js"></script>
+	<script type="text/javascript" src=".//js/jquery-print.js"></script>
+  <script type="text/javascript" src=".//js/jquery.batchImageLoad.js"></script>
+  <script type="text/javascript" src=".//js/jquery.parsequery.min.js"></script>
+  <script type="text/javascript" src=".//js/jquery.doubletap-0.1.js"></script>
+  <script type="text/javascript" src=".//js/jquery.tipsy.js"></script>
+
+  <script type="text/javascript" src=".//js/fg.menu.js"></script>
+  <script type="text/javascript" src=".//js/showoff.js"></script>
+  <script type="text/javascript" src=".//js/jTypeWriter.js"> </script>
+  <script type="text/javascript" src=".//js/sh_main.min.js"></script>
+  <script type="text/javascript" src=".//js/core.js"></script>
+  <script type="text/javascript" src=".//js/showoffcore.js"></script>
+  <script type="text/javascript" src=".//js/coffee-script.js"></script>
+
+  
+    
+      <script type="text/javascript" src=".//js/sh_lang/sh_java.min.js"></script>
+    
+      <script type="text/javascript" src=".//js/sh_lang/sh_gherkin.min.js"></script>
+    
+      <script type="text/javascript" src=".//js/sh_lang/sh_javascript.min.js"></script>
+    
+      <script type="text/javascript" src=".//js/sh_lang/sh_sh.min.js"></script>
+    
+      <script type="text/javascript" src=".//js/sh_lang/sh_yaml.min.js"></script>
+    
+      <script type="text/javascript" src=".//js/sh_lang/sh_php.min.js"></script>
+    
+  
+
+  
+    
+    <link rel="stylesheet" href=".//file/sh_style.css" type="text/css"/>
+  
+    
+    <link rel="stylesheet" href=".//file/styles.css" type="text/css"/>
+  
+
+  
+
+  <script type="text/javascript">
+    $(function(){
+      setupPreso(false, './');
+    });
+
+    editUrl  = "";
+  </script>
+
+</head>
+
+<body>
+
+<a tabindex="0" href="#search-engines" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="navmenu"><span class="ui-icon ui-icon-triangle-1-s"></span>slides</a>
+<div id="navigation" class="hidden"></div>
+<a tabindex="1" href="#search-engines" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="stylemenu"><span class="ui-icon ui-icon-triangle-1-s"></span>styles</a>
+<div id="stylepicker" class="hidden"></div>
+
+
+<div id="help">
+  <table>
+    <tr><td class="key">z, ?</td><td>toggle help (this)</td></tr>
+    <tr><td class="key">space, &rarr;</td><td>next slide</td></tr>
+    <tr><td class="key">shift-space, &larr;</td><td>previous slide</td></tr>
+    <tr><td class="key">b</td><td>blank screen</td></tr>
+    <tr><td class="key">d</td><td>toggle debug mode</td></tr>
+    <tr><td class="key">## &lt;ret&gt;</td><td>go to slide #</td></tr>
+    <tr><td class="key">c, t</td><td>table of contents (vi)</td></tr>
+    <tr><td class="key">f</td><td>toggle footer</td></tr>
+    <tr><td class="key">g</td><td>toggle follow</td></tr>
+    <tr><td class="key">r</td><td>reload slides</td></tr>
+    <tr><td class="key">n</td><td>toggle notes</td></tr>
+    <tr><td class="key">p</td><td>run preshow</td></tr>
+    <tr><td class="key">P</td><td>toggle pause</td></tr>
+    <tr><td class="key">s</td><td>choose style</td></tr>
+  </table>
+</div>
+
+<div class="buttonNav">
+  <input type="submit" onClick="prevStep();" value="prev"/>
+  <input type="submit" onClick="nextStep();" value="next"/>
+</div>
+
+<div id="preso"><center>loading presentation...</center></div>
+<div id="footer">
+  <span id="followMode"></span>
+  <span id="slideInfo"></span>
+  <span id="debugInfo"></span>
+  <span id="notesInfo"></span>
+  <span id="slideFilename"></span>
+  <img id="disconnected" src=".//css/disconnected.png" />
+</div>
+
+<div id="slides" class="offscreen" style="display:none;">
+<html><body>
+<div id="one/01_slide" class="slide front" data-transition="none">
+<div class="content front" ref="one/01_slide/1">
+<h1>Practical BDD with Behat and Drupal</h1>
+
+<p><img src="./file/one/beehat-druplicon.png" alt="drupal">
+<img src="./file/one/behat.png" alt="behat"></p>
+
+<p><img src="./file/one/cc.png" alt="cc"></p>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide speaker center" data-transition="none">
+<div class="content speaker center" ref="one/01_slide/2">
+<h1>Jonathan Hedstrom</h1>
+
+<p><a href="http://twitter.com/jhedstro">@jhedstro</a></p>
+
+<p><a href="http://drupal.org/user/208732">jhedstrom</a></p>
+
+<p><img src="./file/one/jhedstrom.jpg" alt="Jonathan Hedstrom"></p>
+
+<p><img src="./file/one/phase2.png" alt="Phase2"></p>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/3">
+<h1>Quality Assurance</h1>
+
+<h2>QA is the voice of the user</h2>
+
+<p><img src="./file/one/voice.jpg" alt="Voice of the user"></p>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide incremental" data-transition="none">
+<div class="content incremental" ref="one/01_slide/4">
+<h1>Quality Assurance</h1>
+
+<h2>QA touches every part of the development cycle</h2>
+
+<ul>
+<li>Sales</li>
+<li>Discovery</li>
+<li>Development</li>
+<li>Deployment</li>
+<li>Support</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide small" data-transition="none">
+<div class="content small" ref="one/01_slide/5">
+<h1>BDD Principal 1:</h1>
+
+<h2>Everyone on the team should refer to website features in the same way</h2>
+
+<p><img src="./file/one/team.jpg" alt="Team"></p>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide small" data-transition="none">
+<div class="content small" ref="one/01_slide/6">
+<h1>BDD Principal 2:</h1>
+
+<h2>Any feature on the site should have an identified verifiable value to the business or organization</h2>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide bdd-3 bdd small" data-transition="none">
+<div class="content bdd-3 bdd small" ref="one/01_slide/7">
+<h1>BDD Principal 3:</h1>
+
+<h2>Ignorance is the biggest constraint of software development</h2>
+
+<p><img src="./file/one/dragons.jpg" alt="Hic sunt dracones"></p>
+
+<p><span class="dragons">Hic sunt dracones</span></p>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/8">
+<h1>Behat provides a common language</h1>
+
+<div class="column column-1">
+<h3>Selenium test</h3>
+  <pre class="sh_java sh_sourceCode">
+    <code>
+    package org.openqa.selenium.example;
+
+    import org.openqa.selenium.By;
+    import org.openqa.selenium.WebDriver;
+    import org.openqa.selenium.WebElement;
+    import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+    public class Example  {
+      public static void main(String[] args) {
+        // Create a new instance of the html unit driver
+        // Notice that the remainder of the code relies on the interface, 
+        // not the implementation.
+        WebDriver driver = new HtmlUnitDriver();
+
+        // And now use this to visit Google
+        driver.get("http://www.google.com");
+
+        // Find the text input element by its name
+        WebElement element = driver.findElement(By.name("q"));
+
+        // Enter something to search for
+        element.sendKeys("Cheese!");
+
+        // Now submit the form. WebDriver will find the form for us from the element
+        element.submit();
+
+        // Check the title of the page
+        System.out.println("Page title is: " + driver.getTitle());
+      }
+    }
+    </code>
+  </pre>
+</div>
+
+<div class="column column-2">
+  <h3> Behat test</h3>
+  <pre class="sh_gherkin sh_sourceCode">
+    <code>
+    Given I am at "http://www.google.com"
+    When I enter "Cheese!" for "Search"
+    And click "Google Search"
+    Then I should see the text "results"
+    </code>
+  </pre>
+</div>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/9">
+<h1>First, tell a story</h1>
+
+<pre class="sh_gherkin"><code>Feature: Engage prior to registration
+  In order engage potential users
+  As an inspired fan of the "Little Boy" movie
+  I need be able to select calls to action without email verification</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/10">
+<h1>Next, elaborate with scenarios</h1>
+
+<pre class="sh_gherkin"><code>Scenario: Select calls to action form remembers user without signin
+  Given I am not logged in
+  When I follow "Let's get started!"
+  Then I can select calls to action I am interested in</code></pre>
+
+<hr>
+
+<pre class="sh_gherkin"><code>  Given: Put the system in a known state
+  When: Act on the system
+  Then: Describe the result of the action</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/11">
+<h1>Finally, save to a file and execute</h1>
+
+<pre class="sh_gherkin"><code>Feature: Engage prior to registration
+  In order engage potential users
+  As an inspired fan of the "Little Boy" movie
+  I need be able to select calls to action without email verification
+
+Scenario: Multistep signup form remembers user without signin
+  Given I am not logged in
+  When I follow "Let's get started!"
+  Then I can select calls to action I am interested in
+
+1 scenario (1 failed)
+3 steps (3 passed, 0 failed)
+0m0.545s</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/12">
+<h1>Behat</h1>
+
+<h2>Discover what we don't know</h2>
+
+<pre class="sh_gherkin"><code>Feature: Engage prior to registration
+  In order engage potential users
+  As a site visitor
+  I need be able to start the multi-step signup process without email verification
+
+Scenario: Multistep signup form remembers user without signin
+  Given I am not logged in
+  When I follow "Let's get started!"
+  Then I can select calls to action I am interested in
+    No calls to action found on the page.
+
+1 scenario (1 failed)
+3 steps (2 passed, 1 failed)
+0m0.545s</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/13">
+<h1>The various components at work</h1>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/14">
+<h1>Mink</h1>
+
+<h2>Web acceptance testing</h2>
+
+<p>Separates the concept of testing web applications from the actual browser used.</p>
+
+<p><a href="http://mink.behat.org">http://mink.behat.org</a></p>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide small incremental" data-transition="none">
+<div class="content small incremental" ref="one/01_slide/15">
+<h1>Supported browser drivers</h1>
+
+<ul>
+<li>Goutte</li>
+<li>Selenium</li>
+<li>WebDriver (Selenium 2)</li>
+<li>Sahi</li>
+<li>Zombie</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/16">
+<h1>Mink Extension</h1>
+
+<p>Provides language and corresponding step-definitions for testing web applications.</p>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/17">
+<h1>Mink Extension</h1>
+
+<p>Provides language and corresponding step-definitions for testing web applications.</p>
+
+<pre class="sh_gherkin"><code>Given I visit "http://google.com"
+When I fill in "Drupal" for "Search"
+And press "Search"
+Then I should see the link "http://drupal.org"</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide incremental" data-transition="none">
+<div class="content incremental" ref="one/01_slide/18">
+<h1>The Drupal Extension</h1>
+
+<ul>
+<li>Provides language and step-definitions specific to testing Drupal web applications.</li>
+<li>Builds on top of the Mink Extension</li>
+<li>https://github.com/jhedstrom/drupalextension</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/19">
+<h1>The Drupal Extension</h1>
+
+<pre class="sh_gherkin"><code>Given I am logged in as a user with the "administrator" role
+When I am at "node/add"
+Then I should see the link "Article"
+And I should see the link "Basic page"</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide small" data-transition="none">
+<div class="content small" ref="one/01_slide/20">
+<h1>Getting started with the Drupal Extension</h1>
+
+<p>Sample <code>composer.json</code> file</p>
+
+<pre class="sh_javascript"><code>{
+  "require": {
+    "drupal/drupal-extension": "~3.0"
+  },
+  "config": {
+    "bin-dir": "bin/"
+  }
+}</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide center" data-transition="none">
+<div class="content center" ref="one/01_slide/21">
+<h1>Getting started with the Drupal Extension</h1>
+
+<p>You'll need to install <em>Composer</em> (http://getcomposer.org). I install
+it globally so I can just call <code>composer</code>.</p>
+
+<pre class="sh_sh"><code>$&gt; composer install</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide small" data-transition="none">
+<div class="content small" ref="one/01_slide/22">
+<h1>Getting started with the Drupal Extension</h1>
+
+<p>Sample <code>behat.yml</code> file</p>
+
+<pre class="sh_yaml"><code>default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+extensions:
+  Behat\MinkExtension:
+    goutte: ~
+    selenium2: ~
+    base_url: http://d7.devl/
+  Drupal\DrupalExtension:
+    blackbox: ~
+    api_driver: "drupal"
+    drupal:
+      drupal_root: "~/path/to/drupal-7"</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide center small" data-transition="none">
+<div class="content center small" ref="one/01_slide/23">
+<h1>Getting started with the Drupal Extension</h1>
+
+<p>Initialize custom <code>FeatureContext</code> and directory structure.</p>
+
+<pre class="sh_sh"><code>$&gt; bin/behat --init</code></pre>
+
+<p><img src="./file/one/init.png" alt="Behat init"></p>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide small" data-transition="none">
+<div class="content small" ref="one/01_slide/24">
+<h1>The starter FeatureContext</h1>
+
+<pre class="sh_php"><code>&lt;?php
+
+use Behat\Behat\Tester\Exception\PendingException;
+use Drupal\DrupalExtension\Context\RawDrupalContext;
+use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Gherkin\Node\PyStringNode;
+use Behat\Gherkin\Node\TableNode;
+
+/**
+ * Defines application features from the specific context.
+ */
+class FeatureContext extends RawDrupalContext
+  implements SnippetAcceptingContext {
+
+  /**
+   * Initializes context.
+   *
+   * Every scenario gets its own context instance.
+   * You can also pass arbitrary arguments to the
+   * context constructor through behat.yml.
+   */
+  public function __construct() {
+  }
+}</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide center small" data-transition="none">
+<div class="content center small" ref="one/01_slide/25">
+<h1>Default Drupal step definitions</h1>
+
+<p>List of available step definitions</p>
+
+<pre class="sh_sh"><code>$&gt; bin/behat -dl</code></pre>
+
+<p><img src="./file/one/behat-dl.png" alt="behat -dl command"></p>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide incremental small center" data-transition="none">
+<div class="content incremental small center" ref="one/01_slide/26">
+<h1>Available step-definition contexts</h1>
+
+<ul>
+<li>
+<code>DrupalContext</code> Content, Users, and Taxonomy</li>
+<li>
+<code>MinkContext</code> Extends the...Mink Extension</li>
+<li>
+<code>MessageContext</code> Drupal success/warning/error messages</li>
+<li>
+<code>MarkupContext</code> Verify markup</li>
+<li>
+<code>DrushContext</code> Use drush commands in steps</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide small center incremental" data-transition="none">
+<div class="content small center incremental" ref="one/01_slide/27">
+<h1>Drivers</h1>
+
+<p>Provide multiple ways of manipulating Drupal.</p>
+
+<ul>
+<li>Blackbox
+(no direct access to backend)</li>
+<li>Drush
+(uses Drush aliases to access local or remote sites)</li>
+<li>Drupal
+(uses direct Drupal API calls to access local sites)</li>
+<li>Services/REST
+(Coming soon?)</li>
+<li>Support multiple major versions of Drupal</li>
+<li><a href="https://github.com/jhedstrom/DrupalDriver">https://github.com/jhedstrom/DrupalDriver</a></li>
+</ul>
+
+<p>These are not Behat-specific!</p>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide small incremental" data-transition="none">
+<div class="content small incremental" ref="one/01_slide/28">
+<h1>Dynamic step-definition discovery</h1>
+
+<ul>
+<li>Ability to find and load sub-contexts that can be bundled with contrib modules</li>
+<li>Complex features can have common step-definitions (think Media, or Views)</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide small" data-transition="none">
+<div class="content small" ref="one/01_slide/29">
+<h1>Dynamic step-definition discovery</h1>
+
+<p>The <a href="https://www.drupal.org/node/1932698">maillog module</a> provides step-definitions for checking if emails are sent.</p>
+
+<pre class="sh_gherkin"><code>Then 1 email should be sent:
+| To               | Subject                                    |
+| test@example.com | Account details for Test User at Site Name |</code></pre>
+
+<p>This is very useful, even if it isn't BDD, for testing things like complex Rules.</p>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/30">
+<h1>Test suites</h1>
+
+<pre class="sh_gherkin"><code>Feature: Related content
+  In order to read more interesting articles
+  As a reader
+  I need to see related articles to the one I'm reading</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/31">
+<h1>Test suites</h1>
+
+<pre class="sh_yaml"><code>suites:
+  integration:
+    tags: "@integration"
+  ...
+  frontend:
+    tags: "@ui"</code></pre>
+
+<hr>
+
+<pre class="sh_sh"><code>$&gt; bin/behat --profile=integration</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/32">
+<h1>BDD or functional testing?</h1>
+
+<p>The tools allow for both.</p>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide incremental" data-transition="none">
+<div class="content incremental" ref="one/01_slide/33">
+<h1>VISTA Campus</h1>
+
+<ul>
+<li><a href="http://www.vistacampus.gov">http://www.vistacampus.gov</a></li>
+<li>No <strong>True BDD</strong>™</li>
+<li>Behat was used to translate development plan to actionable work by developers</li>
+<li>Developers added hundreds of scenarios along the way</li>
+<li>Caught untold number of regressions</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide incremental" data-transition="none">
+<div class="content incremental" ref="one/01_slide/34">
+<h1>Removing barriers</h1>
+
+<ul>
+<li>Have automated build tools run Behat by default</li>
+<li>Allows developers to add tests as they go without setup overhead</li>
+<li>Provide a few default scenarios at the beginning of every project</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/35">
+<h1>Removing barriers</h1>
+
+<pre class="sh_gherkin"><code>@api
+Feature: Basic authenticated user functionality
+  In order to prove that this site is functional for logged in users
+  As a user
+  I need to be able to edit my account
+    And I need to be able to log out of the site
+
+Background:
+  Given I am logged in as a user with the "authenticated user" role
+
+Scenario: Authenticated user edit their account
+  Given I am at "/"
+  When I click "My account"
+  Then I should see the link "Edit"
+
+Scenario: Authenticated user can see a logout link
+  When I visit "/"
+  Then I should see the link "Log out"</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/36">
+<h1>Thank you!</h1>
+
+<h2>Questions?</h2>
+
+<p><img style="width: 200px" src="image/one/beehat-druplicon.png">
+<span class="credit">Druplicon <em>beehat</em> by jessehs</span></p>
+
+<h2>Resources</h2>
+
+<p><span class="credit"><a href="http://behat-drupal-extension.readthedocs.org/">Drupal Extension Documentation</a></span>
+<span class="credit"><a href="http://drupalwatchdog.com/system/files/Behavior-Driven%20Development%20LSD%20Guide.pdf">BDD - A Large Scale Drupal Guide</a></span>
+<span class="credit">Slides available at <a href="http://jhedstrom.github.com">http://jhedstrom.github.com</a></span>
+<span class="credit">Slides powered by <a href="http://github.com/schacon/showoff">https://github.com/puppetlabs/showoff</a></span></p>
+</div>
+</div>
+</body></html></div>
+<div id="pauseScreen">
+  PAUSED
+</div>
+
+</body>
+</html>
