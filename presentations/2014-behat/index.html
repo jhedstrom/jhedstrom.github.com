@@ -43,9 +43,9 @@
     
       <script type="text/javascript" src=".//js/sh_lang/sh_gherkin.min.js"></script>
     
-      <script type="text/javascript" src=".//js/sh_lang/sh_javascript.min.js"></script>
-    
       <script type="text/javascript" src=".//js/sh_lang/sh_sh.min.js"></script>
+    
+      <script type="text/javascript" src=".//js/sh_lang/sh_javascript.min.js"></script>
     
       <script type="text/javascript" src=".//js/sh_lang/sh_yaml.min.js"></script>
     
@@ -144,62 +144,18 @@
 </body></html><html><body>
 <div id="one/01_slide" class="slide " data-transition="none">
 <div class="content " ref="one/01_slide/3">
-<h1>Quality Assurance</h1>
-
-<h2>QA is the voice of the user</h2>
-
-<p><img src="./file/one/voice.jpg" alt="Voice of the user"></p>
-</div>
-</div>
-</body></html><html><body>
-<div id="one/01_slide" class="slide incremental" data-transition="none">
-<div class="content incremental" ref="one/01_slide/4">
-<h1>Quality Assurance</h1>
-
-<h2>QA touches every part of the development cycle</h2>
-
-<ul>
-<li>Sales</li>
-<li>Discovery</li>
-<li>Development</li>
-<li>Deployment</li>
-<li>Support</li>
-</ul>
-</div>
-</div>
-</body></html><html><body>
-<div id="one/01_slide" class="slide small" data-transition="none">
-<div class="content small" ref="one/01_slide/5">
-<h1>BDD Principal 1:</h1>
+<h1>BDD Principle:</h1>
 
 <h2>Everyone on the team should refer to website features in the same way</h2>
 
 <p><img src="./file/one/team.jpg" alt="Team"></p>
+
+<p>(ubiquitous language)</p>
 </div>
 </div>
 </body></html><html><body>
 <div id="one/01_slide" class="slide small" data-transition="none">
-<div class="content small" ref="one/01_slide/6">
-<h1>BDD Principal 2:</h1>
-
-<h2>Any feature on the site should have an identified verifiable value to the business or organization</h2>
-</div>
-</div>
-</body></html><html><body>
-<div id="one/01_slide" class="slide bdd-3 bdd small" data-transition="none">
-<div class="content bdd-3 bdd small" ref="one/01_slide/7">
-<h1>BDD Principal 3:</h1>
-
-<h2>Ignorance is the biggest constraint of software development</h2>
-
-<p><img src="./file/one/dragons.jpg" alt="Hic sunt dracones"></p>
-
-<p><span class="dragons">Hic sunt dracones</span></p>
-</div>
-</div>
-</body></html><html><body>
-<div id="one/01_slide" class="slide " data-transition="none">
-<div class="content " ref="one/01_slide/8">
+<div class="content small" ref="one/01_slide/4">
 <h1>Behat provides a common language</h1>
 
 <div class="column column-1">
@@ -255,18 +211,18 @@
 </div>
 </body></html><html><body>
 <div id="one/01_slide" class="slide " data-transition="none">
-<div class="content " ref="one/01_slide/9">
+<div class="content " ref="one/01_slide/5">
 <h1>First, tell a story</h1>
 
-<pre class="sh_gherkin"><code>Feature: Engage prior to registration
-  In order engage potential users
+<pre class="sh_gherkin"><code>Feature: Allow immediate engagement
+  In order immediately begin participating
   As an inspired fan of the "Little Boy" movie
   I need be able to select calls to action without email verification</code></pre>
 </div>
 </div>
 </body></html><html><body>
 <div id="one/01_slide" class="slide " data-transition="none">
-<div class="content " ref="one/01_slide/10">
+<div class="content " ref="one/01_slide/6">
 <h1>Next, elaborate with scenarios</h1>
 
 <pre class="sh_gherkin"><code>Scenario: Select calls to action form remembers user without signin
@@ -283,11 +239,15 @@
 </div>
 </body></html><html><body>
 <div id="one/01_slide" class="slide " data-transition="none">
-<div class="content " ref="one/01_slide/11">
+<div class="content " ref="one/01_slide/7">
 <h1>Finally, save to a file and execute</h1>
 
-<pre class="sh_gherkin"><code>Feature: Engage prior to registration
-  In order engage potential users
+<pre class="sh_sh"><code>$&gt; bin/behat</code></pre>
+
+<hr>
+
+<pre class="sh_gherkin"><code>Feature: Allow immediate engagement
+  In order immediately begin participating
   As an inspired fan of the "Little Boy" movie
   I need be able to select calls to action without email verification
 
@@ -303,17 +263,12 @@ Scenario: Multistep signup form remembers user without signin
 </div>
 </body></html><html><body>
 <div id="one/01_slide" class="slide " data-transition="none">
-<div class="content " ref="one/01_slide/12">
+<div class="content " ref="one/01_slide/8">
 <h1>Behat</h1>
 
 <h2>Discover what we don't know</h2>
 
-<pre class="sh_gherkin"><code>Feature: Engage prior to registration
-  In order engage potential users
-  As a site visitor
-  I need be able to start the multi-step signup process without email verification
-
-Scenario: Multistep signup form remembers user without signin
+<pre class="sh_gherkin"><code>Scenario: Multistep signup form remembers user without signin
   Given I am not logged in
   When I follow "Let's get started!"
   Then I can select calls to action I am interested in
@@ -322,6 +277,65 @@ Scenario: Multistep signup form remembers user without signin
 1 scenario (1 failed)
 3 steps (2 passed, 1 failed)
 0m0.545s</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/9">
+<h1>BDD or functional testing?</h1>
+
+<p>The tools allow for both.</p>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide incremental" data-transition="none">
+<div class="content incremental" ref="one/01_slide/10">
+<h1>VISTA Campus</h1>
+
+<ul>
+<li><a href="http://www.vistacampus.gov">http://www.vistacampus.gov</a></li>
+<li>No <strong>True BDD</strong>™</li>
+<li>Behat was used to translate development plan to actionable work by developers</li>
+<li>Developers added hundreds of steps along the way</li>
+<li>Caught untold number of regressions</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide incremental" data-transition="none">
+<div class="content incremental" ref="one/01_slide/11">
+<h1>Removing barriers</h1>
+
+<ul>
+<li>Have automated build tools run Behat by default</li>
+<li>Allows developers to add tests as they go without setup overhead</li>
+<li>Provide a few default scenarios at the beginning of every project</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="one/01_slide" class="slide " data-transition="none">
+<div class="content " ref="one/01_slide/12">
+<h1>Removing barriers</h1>
+
+<pre class="sh_gherkin"><code>@api
+Feature: Basic authenticated user functionality
+  In order to prove that this site is functional for logged in users
+  As a user
+  I need to be able to edit my account
+    And I need to be able to log out of the site
+
+Background:
+  Given I am logged in as a user with the "authenticated user" role
+
+Scenario: Authenticated user edit their account
+  Given I am at "/"
+  When I click "My account"
+  Then I should see the link "Edit"
+
+Scenario: Authenticated user can see a logout link
+  When I visit "/"
+  Then I should see the link "Log out"</code></pre>
 </div>
 </div>
 </body></html><html><body>
@@ -566,6 +580,11 @@ class FeatureContext extends RawDrupalContext
 <div class="content small" ref="one/01_slide/29">
 <h1>Dynamic step-definition discovery</h1>
 
+<ul>
+<li>Ability to find and load sub-contexts that can be bundled with contrib modules</li>
+<li>Complex features can have common step-definitions (think Media, or Views)</li>
+</ul>
+
 <p>The <a href="https://www.drupal.org/node/1932698">maillog module</a> provides step-definitions for checking if emails are sent.</p>
 
 <pre class="sh_gherkin"><code>Then 1 email should be sent:
@@ -606,65 +625,12 @@ class FeatureContext extends RawDrupalContext
 </body></html><html><body>
 <div id="one/01_slide" class="slide " data-transition="none">
 <div class="content " ref="one/01_slide/32">
-<h1>BDD or functional testing?</h1>
-
-<p>The tools allow for both.</p>
-</div>
-</div>
-</body></html><html><body>
-<div id="one/01_slide" class="slide incremental" data-transition="none">
-<div class="content incremental" ref="one/01_slide/33">
-<h1>VISTA Campus</h1>
-
-<ul>
-<li><a href="http://www.vistacampus.gov">http://www.vistacampus.gov</a></li>
-<li>No <strong>True BDD</strong>™</li>
-<li>Behat was used to translate development plan to actionable work by developers</li>
-<li>Developers added hundreds of scenarios along the way</li>
-<li>Caught untold number of regressions</li>
-</ul>
-</div>
-</div>
-</body></html><html><body>
-<div id="one/01_slide" class="slide incremental" data-transition="none">
-<div class="content incremental" ref="one/01_slide/34">
-<h1>Removing barriers</h1>
-
-<ul>
-<li>Have automated build tools run Behat by default</li>
-<li>Allows developers to add tests as they go without setup overhead</li>
-<li>Provide a few default scenarios at the beginning of every project</li>
-</ul>
+<h1>Code samples!</h1>
 </div>
 </div>
 </body></html><html><body>
 <div id="one/01_slide" class="slide " data-transition="none">
-<div class="content " ref="one/01_slide/35">
-<h1>Removing barriers</h1>
-
-<pre class="sh_gherkin"><code>@api
-Feature: Basic authenticated user functionality
-  In order to prove that this site is functional for logged in users
-  As a user
-  I need to be able to edit my account
-    And I need to be able to log out of the site
-
-Background:
-  Given I am logged in as a user with the "authenticated user" role
-
-Scenario: Authenticated user edit their account
-  Given I am at "/"
-  When I click "My account"
-  Then I should see the link "Edit"
-
-Scenario: Authenticated user can see a logout link
-  When I visit "/"
-  Then I should see the link "Log out"</code></pre>
-</div>
-</div>
-</body></html><html><body>
-<div id="one/01_slide" class="slide " data-transition="none">
-<div class="content " ref="one/01_slide/36">
+<div class="content " ref="one/01_slide/33">
 <h1>Thank you!</h1>
 
 <h2>Questions?</h2>
